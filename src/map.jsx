@@ -15,6 +15,7 @@ const Map = ({ location, zoomLevel }) => (
     </GoogleMapReact>
     </div>
     </div>
+    
 )
 
 export default Map
