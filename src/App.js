@@ -9,28 +9,31 @@ var defaultVal = {
   center: {lat: 40.73, lng: -73.93}, 
   zoom: 12
 }
-
+const mapWidthFull = {width: "100%"};
+const mapWidthTab = {width: "70%", float: "right"}
 class App extends Component {
   
   constructor(props) {
      super(props);
      
      this.state = {
-       planRouteTabVisable: false
+       planRouteTabVisable: false,
+       mapWidth: mapWidthFull
      };
-     this.handleRouteButton = this.handleRouteButton.bind(this);
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
   };
-
-  handleRouteButton( e ){
-    this.toggleRouteButton()
-    e.stopPropagation();
-  }
-
+ 
   toggleRouteButton(){
+    var newMapWidth = ""
+    if (this.state.planRouteTabVisable){
+      newMapWidth = mapWidthFull;
+    } else {
+      newMapWidth = mapWidthTab;
+    }
     this.setState(
       {
-        planRouteTabVisable: !this.state.planRouteTabVisable
+        planRouteTabVisable: !this.state.planRouteTabVisable,
+        mapWidth: newMapWidth
       }
       
     );
@@ -40,9 +43,9 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom}/>
-      <MenuButton handleClick={this.handleRouteButton}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable }/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth }/>
+      <MenuButton handleClick={this.toggleRouteButton}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton}/>
       </div>
       
       );

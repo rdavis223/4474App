@@ -9,7 +9,7 @@ class PlanYourTripTab extends Component {
 
         return (
             <div id="PlanYourTripContainer" className={ visability }>
-                <button> Hello</button>
+                <button onClick= {this.props.handleClick}>Close</button>
                 <p> Some Menu ITems</p>
             </div>
         
