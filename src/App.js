@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from "react";
 import logo from './logo.svg';
 import './App.css';
 import Map from './map.jsx'
@@ -10,21 +10,42 @@ var defaultVal = {
   zoom: 12
 }
 
-var planYourTripVisable = false;
-function togglePlanYourTripVisability(){
-  planYourTripVisable = !planYourTripVisable;
-}
+class App extends Component {
+  
+  constructor(props) {
+     super(props);
+     
+     this.state = {
+       planRouteTabVisable: false
+     };
+     this.handleRouteButton = this.handleRouteButton.bind(this);
+     this.toggleRouteButton = this.toggleRouteButton.bind(this);
+  };
 
-function App() {
-  return (
-    <div>
+  handleRouteButton( e ){
+    this.toggleRouteButton()
+    e.stopPropagation();
+  }
 
-    <Map location={defaultVal.center} zoomLevel={defaultVal.zoom}/>
-    <MenuButton toggleFunction = { togglePlanYourTripVisability }/>
-    <PlanYourTripTab menuVisibility= {planYourTripVisable} toggleFunction= { togglePlanYourTripVisability }/>
-    </div>
-    
+  toggleRouteButton(){
+    this.setState(
+      {
+        planRouteTabVisable: !this.state.planRouteTabVisable
+      }
+      
     );
-}
+    console.log(this.state.planRouteTabVisable);
 
+  }
+  render() {
+    return (
+      <div>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom}/>
+      <MenuButton handleClick={this.handleRouteButton}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable }/>
+      </div>
+      
+      );
+  }
+}
 export default App;

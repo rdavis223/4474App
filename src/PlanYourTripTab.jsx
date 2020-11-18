@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import './PlanYourTripTab.css'
 class PlanYourTripTab extends Component {
-    
     render() {
         var visability = "hide"
         if (this.props.menuVisibility) {
@@ -10,7 +9,7 @@ class PlanYourTripTab extends Component {
 
         return (
             <div id="PlanYourTripContainer" className={ visability }>
-                <button onClick= {this.props.toggleFunction()}> Hello</button>
+                <button> Hello</button>
                 <p> Some Menu ITems</p>
             </div>
         

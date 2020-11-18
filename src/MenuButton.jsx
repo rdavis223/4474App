@@ -4,8 +4,7 @@ import './MenuButton.css';
 class MenuButton extends Component{
     render() {
         return (
-          <button id="PlanYourTripButton"
-                  onClick={this.props.toggleFunction()}>Plan A Trip</button>
+          <button id="PlanYourTripButton" onClick= {this.props.handleClick}>Plan A Trip</button>
         );
       }
 }
