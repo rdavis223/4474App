@@ -1,5 +1,5 @@
 #PlanYourTripContainer {
-    width: 30vw;
+    width: 25vw;
     height: 100vh;
     background-color: #FFE600;
     position: fixed;
@@ -29,3 +29,21 @@
   #PlanYourTripContainer h2 a:hover {
     text-decoration: underline;
   }
+  .innerForm{
+    padding-left: 10px;
+  }
+
+  #SwitchLogo{
+    width: 50px;
+    padding-bottom:20px;
+    pointer-events: all;
+  }
+
+  #SwitchLogoContainer{
+    display:inline-block;
+    padding-right:10px;
+  }
+
+  #InputFieldsContainer{
+    display:inline-block;
+}
