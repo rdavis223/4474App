@@ -1,0 +1,58 @@
+#PlanYourTripContainer {
+    width: 30vw;
+    height: 100vh;
+    background-color: #FFE600;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s
+                cubic-bezier(0, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+  }
+   
+  #PlanYourTripContainer.hide {
+    transform: translate3d(-100vw, 0, 0);
+  }
+   
+  #PlanYourTripContainer.show {
+    transform: translate3d(0vw, 0, 0);
+    overflow: hidden;
+  }
+   
+  #PlanYourTripContainer h2 a {
+    color: #333;
+    margin-left: 15px;
+    text-decoration: none;
+  }
+   
+  #PlanYourTripContainer h2 a:hover {
+    text-decoration: underline;
+  }
+  .innerForm{
+    padding-left: 10px;
+  }
+
+  #SwitchLogo{
+    width: 50px;
+    pointer-events: all;
+  }
+
+  #SwitchLogoContainer{
+    display:inline-block;
+    position: relative;
+    height: 100%;
+    top: -25px;
+    padding-right:10px;
+  }
+
+  #InputFieldsContainer{
+    display:inline-block;
+}
+  #AdditionalOptionsContainer{
+    padding-left:60px;
+    padding-top:20px;
+  }
+  #FindRoute{
+    padding-top:15px;
+  }
