@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import './PlanYourTripTab.css'
 import SearchBox from './SearchBox.jsx'
-import SwitchLogo from './images/switch_icon.png'
 import AdditionalOptions from './AdditionalOptions.jsx'
 
 class PlanYourTripTab extends Component {
@@ -26,10 +25,15 @@ class PlanYourTripTab extends Component {
         }
         return (
             <div id="PlanYourTripContainer" className={ visability }>
-                <button onClick= {this.props.handleClick}>Close</button>
+                <div id="CloseButtonContainer">
+                    <button class="CloseButton" onClick= {this.props.handleClick}>Close</button>
+                </div>
+                <div id="TitleContainer">
+                    Plan A Trip
+                </div>
                 <div className="innerForm">
                     <div id="SwitchLogoContainer">
-                        <img onClick= {this.switchAddy} id="SwitchLogo"src={SwitchLogo}/>
+                        <div class="SwitchLogo" onClick= {this.switchAddy}></div>
                     </div>
                     <div id="InputFieldsContainer">
                         <p>Leaving From: </p>
@@ -40,7 +44,7 @@ class PlanYourTripTab extends Component {
                     <div id="AdditionalOptionsContainer">
                     <AdditionalOptions/>
                     <div id= "FindRoute">
-                    <button> Find Route</button>
+                    <button class="Buttons"> Find Route</button>
                     </div>
                     </div>
                 </div>

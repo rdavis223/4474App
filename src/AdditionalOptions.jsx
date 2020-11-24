@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './PlanYourTripTab.css'
 
 class AdditionalOptions extends Component {
     constructor() {
@@ -20,7 +21,7 @@ class AdditionalOptions extends Component {
     render(){
         return(
             <div>
-                <button onClick={this.toggleMenu}> Show Additional Optinos </button>
+                <button class="Buttons" onClick={this.toggleMenu}> Show Additional Options </button>
                 { this.state.showAddOptions ? (
                 <div id="AddOptionsMenu">
                      <input type="radio" id="min_walking" name="add_options" value="min_walking"/>

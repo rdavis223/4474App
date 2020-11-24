@@ -1,5 +1,20 @@
 #PlanYourTripButton {
     position: absolute !important;
     top: 0vw;
+    width: 200px;
+    height: 50px;
+    background: #8e44e3;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 3px solid #8e44e3;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#PlanYourTripButton:hover {
+    background: white;
+    color: #8e44e3;
 }
 

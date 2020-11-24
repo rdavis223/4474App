@@ -1,58 +1,121 @@
 #PlanYourTripContainer {
-    width: 30vw;
-    height: 100vh;
-    background-color: #FFE600;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transition: transform .3s
-                cubic-bezier(0, .52, 0, 1);
-    overflow: scroll;
-    z-index: 1000;
-  }
-   
-  #PlanYourTripContainer.hide {
-    transform: translate3d(-100vw, 0, 0);
-  }
-   
-  #PlanYourTripContainer.show {
-    transform: translate3d(0vw, 0, 0);
-    overflow: hidden;
-  }
-   
-  #PlanYourTripContainer h2 a {
-    color: #333;
-    margin-left: 15px;
-    text-decoration: none;
-  }
-   
-  #PlanYourTripContainer h2 a:hover {
-    text-decoration: underline;
-  }
-  .innerForm{
-    padding-left: 10px;
-  }
-
-  #SwitchLogo{
-    width: 50px;
-    pointer-events: all;
-  }
-
-  #SwitchLogoContainer{
-    display:inline-block;
-    position: relative;
-    height: 100%;
-    top: -25px;
-    padding-right:10px;
-  }
-
-  #InputFieldsContainer{
-    display:inline-block;
+  width: 30vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #FFF;
+  top: 0;
+  left: 0;
+  transition: transform .3s
+              cubic-bezier(0, .52, 0, 1);
+  overflow: scroll;
+  z-index: 1000;
+  box-shadow: 1px 1px 20px #616161;
 }
-  #AdditionalOptionsContainer{
-    padding-left:60px;
-    padding-top:20px;
-  }
-  #FindRoute{
-    padding-top:15px;
-  }
+  
+#PlanYourTripContainer.hide {
+  transform: translate3d(-100vw, 0, 0);
+}
+  
+#PlanYourTripContainer.show {
+  transform: translate3d(0vw, 0, 0);
+  overflow: hidden;
+}
+  
+#PlanYourTripContainer h2 a {
+  color: #333;
+  margin-left: 15px;
+  text-decoration: none;
+}
+  
+#PlanYourTripContainer h2 a:hover {
+  text-decoration: underline;
+}
+
+.innerForm{
+  padding-left: 45px;
+}
+
+.SwitchLogo {
+  width: 50px;
+  height: 50px;
+  background: url("images/switch_icon.png") no-repeat;
+  background-size: 35px;
+  pointer-events: all;
+}
+
+.SwitchLogo:hover {
+  background: url("images/switch_icon_hover.png") no-repeat;
+  background-size: 35px;
+  pointer-events: all;
+}
+
+#SwitchLogoContainer{
+  display:inline-block;
+  position: relative;
+  height: 100%;
+  top: -20px;
+  padding-left: 30px;
+}
+
+#InputFieldsContainer{
+  display:inline-block;
+  padding: 30px;
+}
+
+#AdditionalOptionsContainer{
+  padding-left:60px;
+  padding-top:20px;
+  text-align: center;
+  width: 400px;
+}
+
+#FindRoute{
+  padding-top:15px;
+  text-align: center;
+}
+
+#CloseButtonContainer {
+  text-align: right;
+  background-color: #8e44e3;
+  padding-right: 2px;
+  padding-top: 2px;
+}
+
+.CloseButton {
+  justify-content: left;
+  background: #8e44e3;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.CloseButton:hover {
+  background: white;
+  color: #8e44e3;
+}
+
+#TitleContainer {
+  background-color: #8e44e3;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.Buttons {
+  padding: 5px 10px 5px 10px;
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  background-color: #48c2a7;
+  border: 1px solid #48c2a7;
+}
+
+.Buttons:hover {
+  color: #48c2a7;
+  background-color: white;
+}
