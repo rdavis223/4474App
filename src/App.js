@@ -10,7 +10,7 @@ var defaultVal = {
   zoom: 12
 }
 const mapWidthFull = {width: "100%"};
-const mapWidthTab = {width: "75vw", float: "right"}
+const mapWidthTab = {width: "70vw", float: "right"}
 class App extends Component {
   
   constructor(props) {

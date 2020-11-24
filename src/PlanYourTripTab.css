@@ -1,5 +1,5 @@
 #PlanYourTripContainer {
-    width: 25vw;
+    width: 30vw;
     height: 100vh;
     background-color: #FFE600;
     position: fixed;
@@ -35,15 +35,24 @@
 
   #SwitchLogo{
     width: 50px;
-    padding-bottom:20px;
     pointer-events: all;
   }
 
   #SwitchLogoContainer{
     display:inline-block;
+    position: relative;
+    height: 100%;
+    top: -25px;
     padding-right:10px;
   }
 
   #InputFieldsContainer{
     display:inline-block;
 }
+  #AdditionalOptionsContainer{
+    padding-left:60px;
+    padding-top:20px;
+  }
+  #FindRoute{
+    padding-top:15px;
+  }
