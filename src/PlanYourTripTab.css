@@ -111,11 +111,11 @@
   font-weight: bold;
   color: white;
   border-radius: 10px;
-  background-color: #48c2a7;
-  border: 1px solid #48c2a7;
+  background-color: #ff425f;
+  border: 1px solid #ff425f;
 }
 
 .Buttons:hover {
-  color: #48c2a7;
+  color: #ff425f;
   background-color: white;
 }
