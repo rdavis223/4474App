@@ -26,14 +26,14 @@ class PlanYourTripTab extends Component {
         return (
             <div id="PlanYourTripContainer" className={ visability }>
                 <div id="CloseButtonContainer">
-                    <button class="CloseButton" onClick= {this.props.handleClick}>Close</button>
+                    <button className="CloseButton" onClick= {this.props.handleClick}>Close</button>
                 </div>
                 <div id="TitleContainer">
                     Plan A Trip
                 </div>
                 <div className="innerForm">
                     <div id="SwitchLogoContainer">
-                        <div class="SwitchLogo" onClick= {this.switchAddy}></div>
+                        <div className="SwitchLogo" onClick= {this.switchAddy}></div>
                     </div>
                     <div id="InputFieldsContainer">
                         <p>Leaving From: </p>
@@ -46,7 +46,7 @@ class PlanYourTripTab extends Component {
                     <div id="AdditionalOptionsContainer">
                         <AdditionalOptions/>
                         <div id= "FindRoute">
-                            <button onClick={this.props.handlePlot} class="Buttons"> Find Route</button>
+                            <button onClick={this.props.handlePlot} className="FindRouteButton"> Find Route</button>
                         </div>
                     </div>
                 </div>

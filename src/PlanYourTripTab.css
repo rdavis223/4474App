@@ -106,7 +106,7 @@
   padding-bottom: 20px;
 }
 
-.Buttons {
+.FindRouteButton {
   padding: 5px 10px 5px 10px;
   font-size: 17px;
   font-weight: bold;
@@ -116,7 +116,22 @@
   border: 1px solid #ff425f;
 }
 
-.Buttons:hover {
+.FindRouteButton:hover {
+  color: #ff425f;
+  background-color: white;
+}
+
+.OptionsButton {
+  padding: 5px 10px 5px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  background-color: #ff425f;
+  border: 1px solid #ff425f;
+}
+
+.OptionsButton:hover {
   color: #ff425f;
   background-color: white;
 }
