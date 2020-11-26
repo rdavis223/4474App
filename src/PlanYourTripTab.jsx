@@ -41,11 +41,13 @@ class PlanYourTripTab extends Component {
                         <p>Going To: </p>
                         <SearchBox inputID="EndAddress"/>
                     </div>
+                </div>
+                <div className="innerForm">
                     <div id="AdditionalOptionsContainer">
-                    <AdditionalOptions/>
-                    <div id= "FindRoute">
-                    <button class="Buttons"> Find Route</button>
-                    </div>
+                        <AdditionalOptions/>
+                        <div id= "FindRoute">
+                            <button onClick={this.props.handlePlot} class="Buttons"> Find Route</button>
+                        </div>
                     </div>
                 </div>
             </div>

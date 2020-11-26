@@ -21,8 +21,15 @@ class App extends Component {
        mapWidth: mapWidthFull
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
+     this.plotRoute = this.plotRoute.bind(this);
+
   };
  
+
+  plotRoute(){
+    console.log("The function works");
+  }
+
   toggleRouteButton(){
     var newMapWidth = ""
     if (this.state.planRouteTabVisable){
@@ -45,7 +52,7 @@ class App extends Component {
       <div>
       <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth }/>
       <MenuButton handleClick={this.toggleRouteButton}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute}/>
       </div>
       
       );

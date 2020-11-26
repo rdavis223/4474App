@@ -32,7 +32,9 @@
 }
 
 .innerForm{
-  padding-left: 45px;
+  width: 397px;
+  margin: 0px auto;
+  position:relative;
 }
 
 .SwitchLogo {
@@ -54,24 +56,23 @@
   position: relative;
   height: 100%;
   top: -20px;
-  padding-left: 30px;
+  padding-left: 5px;
 }
 
 #InputFieldsContainer{
   display:inline-block;
-  padding: 30px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  padding-left: 10px
 }
 
 #AdditionalOptionsContainer{
-  padding-left:60px;
-  padding-top:20px;
   text-align: center;
-  width: 400px;
+  padding-top:20px;
 }
 
 #FindRoute{
   padding-top:15px;
-  text-align: center;
 }
 
 #CloseButtonContainer {
