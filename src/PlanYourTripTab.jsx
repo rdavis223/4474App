@@ -51,8 +51,6 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
             </div>
-        
-        
         )
     }
 }
