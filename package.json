@@ -4,12 +4,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^1.13.0",
     "cra-template": "1.1.0",
+    "decode-google-map-polyline": "^1.0.1",
     "google-map-react": "^2.1.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
-    "react-scrollbar-js": "^1.0.1"
+    "react-scrollbar-js": "^1.0.1",
+    "react-google-maps": "^9.4.5",
   },
   "scripts": {
     "predeploy": "npm run build",
