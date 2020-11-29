@@ -23,6 +23,30 @@ class PlanYourTripTab extends Component {
         if (this.props.menuVisibility) {
             visability = "show";
         }
+
+        var items = []
+        var data = this.props.route_data;
+        if (data !== null){
+            for (var route in data){
+                var r = data[route].legs[0];
+                var buses = []
+                for (var step in r.steps){
+                    var d = r.steps[step];
+                    if (d.travel_mode == "TRANSIT"){
+                        buses.push(d.transit_details.line.name);
+                    }
+                }
+                items.push( <div key={route}> 
+                                ------------<br/>
+                                Distance: {r.distance.text} <br/>
+                                Duration: {r.duration.text} <br/>
+                                Transfers: {buses.length - 1} <br/>
+                                Buses: {buses.toString()} <br/>
+                            </div>   )
+                }
+        }   
+
+
         return (
             <div id="PlanYourTripContainer" className={ visability }>
                 <div id="CloseButtonContainer">
@@ -50,6 +74,14 @@ class PlanYourTripTab extends Component {
                         </div>
                     </div>
                 </div>
+                { this.props.displayRoutes ? (
+                <div className="innerForm">
+                    <div id="RoutesBox"> 
+                        {items}
+                    </div>
+                </div>
+                ) : (null) }
+
             </div>
         
         

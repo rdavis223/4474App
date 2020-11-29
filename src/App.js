@@ -18,16 +18,53 @@ class App extends Component {
      
      this.state = {
        planRouteTabVisable: false,
-       mapWidth: mapWidthFull
+       mapWidth: mapWidthFull,
+       route_data: null,
+       display_routes: false
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
 
   };
- 
+
+  buildRequestUrl(){
+    var params = {}
+    params['key'] = "AIzaSyD8LiaQi4w3UySiDfi_38xpGvJ2iqFv7Hk";
+    params['mode'] = "transit"
+    params['transit_mode'] = "bus"
+    params['origin'] = document.getElementById("StartAddress").value;
+    params['destination'] = document.getElementById("EndAddress").value;
+    params['alternatives'] = "true";
+    var min_walking = document.getElementById("min_walking");
+    var min_transfers = document.getElementById("min_transfers");
+    if (min_walking !== null && min_transfers !==null ){
+      if (min_walking.checked){
+        params['transit_routing_preference'] = 'less_walking';
+      } else if (min_transfers.checked){
+        params['transit_routing_preference'] = 'fewer_transfers';
+      }
+    }
+    var url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?";
+    for (var key in params){
+      var value = params[key];
+      console.log(value);
+      value = value.replace(/ /g, "+");
+      url += key + "="+ value + "&";
+    }
+    return url
+  }
 
   plotRoute(){
-    console.log("The function works");
+    var url = this.buildRequestUrl();
+
+    fetch(url)
+    .then(response => response.json()).then(data => {
+      console.log(data);
+      this.setState({
+        route_data: data.routes,
+        display_routes: true
+      })
+    })
   }
 
   toggleRouteButton(){
@@ -52,7 +89,7 @@ class App extends Component {
       <div>
       <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth }/>
       <MenuButton handleClick={this.toggleRouteButton}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data}/>
       </div>
       
       );
