@@ -68,7 +68,7 @@ class App extends Component {
   }
 
   toggleRouteButton(){
-    var newMapWidth = ""
+    var newMapWidth = "";
     if (this.state.planRouteTabVisable){
       newMapWidth = mapWidthFull;
     } else {
