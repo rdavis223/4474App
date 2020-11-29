@@ -13,7 +13,6 @@ class Map extends Component {
         return (
             <div className="map">
                 <div className="google-map" style = { this.props.mapWidth }>
-                <LoadScript googleMapsApiKey='AIzaSyD8LiaQi4w3UySiDfi_38xpGvJ2iqFv7Hk'>
                 <GoogleMap
                     mapContainerStyle = {{
                         width: this.props.mapWidth.width,
@@ -24,8 +23,6 @@ class Map extends Component {
                 >
                     
                 </GoogleMap>
-
-                </LoadScript>
                 </div>
             </div>
                 
