@@ -10,7 +10,7 @@ var defaultVal = {
   zoom: 12
 }
 const mapWidthFull = {width: "100%"};
-const mapWidthTab = {width: "70vw", float: "right"}
+const mapWidthTab = {width: "70vw", float: "right"};
 class App extends Component {
   
   constructor(props) {
@@ -20,13 +20,24 @@ class App extends Component {
        planRouteTabVisable: false,
        mapWidth: mapWidthFull,
        route_data: null,
-       display_routes: false
+       display_routes: false,
+       sort_by: null,
+       mapPolyline: null,
+       mapBounds: null
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
+     this.displayPolyline = this.displayPolyline.bind(this);
 
   };
 
+
+  displayPolyline(polyline, bounds){
+    this.setState({
+      mapPolyline: polyline,
+      mapBounds: bounds
+    })
+  }
   buildRequestUrl(){
     var params = {}
     params['key'] = "AIzaSyD8LiaQi4w3UySiDfi_38xpGvJ2iqFv7Hk";
@@ -39,9 +50,11 @@ class App extends Component {
     var min_transfers = document.getElementById("min_transfers");
     if (min_walking !== null && min_transfers !==null ){
       if (min_walking.checked){
+        this.state.sort_by = "walking";
         params['transit_routing_preference'] = 'less_walking';
       } else if (min_transfers.checked){
         params['transit_routing_preference'] = 'fewer_transfers';
+        this.state.sort_by = "transfers";
       }
     }
     var url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?";
@@ -87,9 +100,9 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth }/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       </div>
       
       );
