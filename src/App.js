@@ -57,6 +57,25 @@ class App extends Component {
         this.state.sort_by = "transfers";
       }
     }
+
+    var time_options = document.getElementsByName("time_options");
+    for (var index in time_options){
+      if (time_options[index].checked){
+        if (time_options[index].value == "now"){
+          break;
+        } else {
+          var eID = time_options[index].value + "_at_input";
+          var time = new Date(document.getElementById(eID).value).getTime();
+          time = (time/1000).toString()
+          if (time_options[index].value == "arriving"){
+            params["arrival_time"] = time;
+          } else if (time_options[index].value == "leaving"){
+            params["departure_time"] = time;
+          }
+        }
+    }
+    }
+    
     var url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?";
     for (var key in params){
       var value = params[key];
@@ -69,7 +88,7 @@ class App extends Component {
 
   plotRoute(){
     var url = this.buildRequestUrl();
-
+    console.log(url);
     fetch(url)
     .then(response => response.json()).then(data => {
       console.log(data);

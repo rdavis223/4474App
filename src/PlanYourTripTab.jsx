@@ -49,7 +49,9 @@ class PlanYourTripTab extends Component {
                     transfers: buses.length - 1,
                     walking : walking_distance,
                     polyline: data[route].overview_polyline.points,
-                    bounds: data[route].bounds
+                    bounds: data[route].bounds,
+                    arrival: r.arrival_time.text,
+                    departure: r.departure_time.text
                 }
 
                 this.data.push(element)
@@ -70,11 +72,13 @@ class PlanYourTripTab extends Component {
                                 Duration: {elem.duration.text} <br/>
                                 Transfers: {elem.transfers} <br/>
                                 Walking: {elem.walking.toString() + "kms"} <br/>
+                                Depart At: {elem.departure} <br/>
+                                Arriving At: {elem.arrival} <br/>
                             </div>   );
             }
         }   
 
-
+        var min_date = new Date().toISOString()
         return (
             <div id="PlanYourTripContainer" className={ visability }>
                 <div id="CloseButtonContainer">
@@ -96,6 +100,20 @@ class PlanYourTripTab extends Component {
                 </div>
                 <div className="innerForm">
                     <div id="AdditionalOptionsContainer">
+                        <div id="TimeOptionsContainer">
+                            <input type="radio" id="time_now" name="time_options" value="now"/>
+                            <label for="time_now">Leaving Now</label><br/>
+                            <input type="radio" id="time_leaving" name="time_options" value="leaving"/>
+                            <label for="time_leaving">Leaving At:</label>
+                            <input type="datetime-local" id="leaving_at_input"
+                            name="meeting-time" 
+                            /><br/>
+                            <input type="radio" id="time_arriving" name="time_options" value="arriving"/>
+                            <label for="time_arriving">Arrving At:</label>
+                            <input type="datetime-local" id="arriving_at_input"
+                            name="meeting-time" />
+                            <br/>
+                        </div>
                         <AdditionalOptions/>
                         <div id= "FindRoute">
                             <button onClick={this.props.handlePlot} className="Buttons"> Find Route</button>
