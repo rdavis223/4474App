@@ -8,7 +8,16 @@ class Map extends Component {
     constructor(props){
         super(props);
         this.map = null;
+        this.arrMarker = props.arrMarker;
+        this.desMarker = props.desMarker;
+        this.updateArrival = props.updateArrival;
+        this.updateDeparture = props.updateDeparture;
     }
+
+    // onArrPositionChanged() {
+    //     arrLat = this.getPosition().lat;
+    //     arrLng = this.getPosition().lng;
+    // }
 
     // componentDidMount(){
     //     var test_bounds =  {
@@ -22,6 +31,12 @@ class Map extends Component {
     render(){
         //leaving this as an example of how to decode an encoded polyline from google maps api
         var renderPolyline = false;
+        console.log(this.arrMarker);
+        var arrLat = this.arrMarker.lat;
+        var arrLng = this.arrMarker.lng;
+        var desLat = this.desMarker.lat;
+        var desLng = this.desMarker.lng;
+        // var destinationAddress = "lat: 42.99253105656541, lng: -81.25222223247258";
         var coordinates = null;
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
@@ -47,7 +62,26 @@ class Map extends Component {
                         <Polyline path={coordinates}/>
                     ) : (null)
                 }
-
+                <Marker 
+                    id = 'arrival_pin'
+                    draggable = {true}
+                    onDragEnd = {this.props.updateArrival(this.position)}
+                    title = 'The Ceeps'
+                    label = "Arrival"
+                    clickable = {true}
+                    defaultClickable = {true}
+                    position = {{ lat: arrLat, lng: arrLng }}
+                />
+                <Marker 
+                    id = 'destination_pin'
+                    draggable = {true}
+                    onDragEnd = {this.props.updateDeparture(this.position)}
+                    title = 'Broughdale'
+                    label = "Destination"
+                    clickable = {true}
+                    defaultClickable = {true}
+                    position = {{ lat: desLat, lng: desLng }}
+                />
                 </GoogleMap>
 
                 </div>

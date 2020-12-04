@@ -6,9 +6,14 @@ import MenuButton from './MenuButton.jsx'
 import PlanYourTripTab from './PlanYourTripTab.jsx'
 
 var defaultVal = {
-  center: {lat: 40.73, lng: -73.93}, 
+  center: {lat: 42.99253105656541, lng: -81.25222223247258}, 
   zoom: 12
 }
+// CEEPS
+var arrivalVal = {lat: 43.00738223906186, lng: -81.26169367032458}
+// var arrivalVal = document.getElementById("StartAddress").value;
+// BROUGHDALE
+var destinationVal = {lat: 42.99253105656541, lng: -81.25222223247258};
 const mapWidthFull = {width: "100%"};
 const mapWidthTab = {width: "70vw", float: "right"};
 class App extends Component {
@@ -17,6 +22,8 @@ class App extends Component {
      super(props);
      
      this.state = {
+       arrVal: arrivalVal,
+       desVal: destinationVal,
        planRouteTabVisable: false,
        mapWidth: mapWidthFull,
        route_data: null,
@@ -28,9 +35,20 @@ class App extends Component {
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
+     this.updateArrival = this.updateArrival.bind(this);
+     this.updateDeparture = this.updateDeparture.bind(this);
 
   };
 
+  updateArrival(newPosition) {
+    arrivalVal = newPosition;
+    document.getElementById("EndAddress").value = arrivalVal;
+  }
+
+  updateDeparture(newPosition) {
+    destinationVal = newPosition;
+    document.getElementById("StartAddress").value = arrivalVal;
+  }
 
   displayPolyline(polyline, bounds){
     this.setState({
@@ -119,7 +137,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds}/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal} updateArrival = {this.updateArrival} updateDeparture = {this.updateDeparture}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       </div>
