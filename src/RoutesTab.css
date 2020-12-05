@@ -1,7 +1,7 @@
 #RoutesTabContainer {
     width: 14vw;
     height: 100vh;
-    background-color: #FFE600;
+    background-color: white;
     position: fixed;
     top: 0;
     right: 0;
@@ -9,6 +9,7 @@
                 cubic-bezier(0, .52, 0, 1);
     overflow: scroll;
     z-index: 1000;
+    box-shadow: 1px 1px 20px #616161;
   }
   #RoutesTabContainer.hide {
     transform: translate3d(100vw, 0, 0);
@@ -20,17 +21,59 @@
   #RoutesTabContainer h2 a {
     color: #333;
     margin-right: 15px;
-    text-decoration: none;
   }
+
   #RoutesTabContainer h2 a:hover {
     text-decoration: underline;
   }
-  .innerForm{
-    padding-right: 10px;
-  }
-  #RoutesTabButtons
-  {
+
+  #RoutesTabButtonsContainer {
     height: 90vh;
     overflow-y: scroll;
     white-space: normal;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  #RoutesTabButtons {
+    border-radius: 10px;
+    margin-bottom: 2px;
+    border-style: none;
+    font-size: 15px;
+    opacity: 1;
+    font-weight: bold;
+  }
+
+  #RoutesTabButtons:hover {
+    opacity: 0.7;
+  }
+
+  #RoutesCloseButtonContainer{
+    text-align: left;
+    background-color: #8e44e3;
+    padding-right: 2px;
+    padding-top: 2px;
+  }
+  
+  .RoutesCloseButton {
+    background: #8e44e3;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border-style: none;
+  }
+  
+  .RoutesCloseButton:hover {
+    background: white;
+    color: #8e44e3;
+  }
+
+  #RoutesTitleContainer {
+    background-color: #8e44e3;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 20px;
   }

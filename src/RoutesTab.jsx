@@ -15,7 +15,7 @@ class RoutesTab extends Component
         coorPoints = this.getRoutesList();
         buttons = []
         for (let i = 0; i < csvValues.length; i++) {
-            buttons.push(<button key = {i}
+            buttons.push(<button key = {i} id="RoutesTabButtons"
                 style = {{width: 200, height: 40, backgroundColor:('#'+ csvValues[i][1])}}
                 onClick={() => this.props.handleBusRouteClicked(coorPoints[csvValues[i][2]], '#'+ csvValues[i][1])}>
                 {csvValues[i][0]}
@@ -66,9 +66,13 @@ class RoutesTab extends Component
         }
         return (
             <div id="RoutesTabContainer" className={ visability }>
-                <button onClick= {this.props.handleClick}>Close</button>
-                <p>Current Routes: </p>
-                <div id = "RoutesTabButtons">
+                <div id="RoutesCloseButtonContainer">
+                     <button className="RoutesCloseButton" onClick= {this.props.handleClick}>Close</button>
+                </div>
+                <div id="RoutesTitleContainer">
+                    Current Routes
+                </div>
+                <div id = "RoutesTabButtonsContainer">
                     {buttons}
                 </div>
             </div>     
