@@ -64,12 +64,22 @@ class PlanYourTripTab extends Component {
             for (var index in this.data){
                 var elem = this.data[index];
                 items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds)}> 
-                                ------------<br/>
-                                Buses: {elem.buses.toString()} <br/>
-                                Distance: {elem.distance.text} <br/>
-                                Duration: {elem.duration.text} <br/>
-                                Transfers: {elem.transfers} <br/>
-                                Walking: {elem.walking.toString() + "kms"} <br/>
+                                <div className="RoutesOption">
+                                    <div className="leftBox">
+                                        Buses:<br />
+                                        Distance:<br />
+                                        Duration:<br />
+                                        Transfers:<br />
+                                        Walking:<br />
+                                    </div>
+                                    <div className="rightBox">
+                                        {elem.buses.toString()}<br />
+                                        {elem.distance.text}<br />
+                                        {elem.duration.text}<br />
+                                        {elem.transfers}<br />
+                                        {elem.walking.toString() + "kms"}<br />
+                                    </div>
+                                </div>
                             </div>   );
             }
         }   

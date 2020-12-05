@@ -20,8 +20,9 @@ class AdditionalOptions extends Component {
 
     render(){
         return(
-            <div>
-                <button className="OptionsButton" onClick={this.toggleMenu}> Show Additional Options </button>
+            <div>{ !this.state.showAddOptions ? (
+                <button className="OptionsButton" onClick={this.toggleMenu}>Show Additional Options</button>
+            ) : (<button className="OptionsButton" onClick={this.toggleMenu}>Hide Additional Options</button>)}
                 { this.state.showAddOptions ? (
                 <div id="AddOptionsMenu">
                      <input type="radio" id="min_walking" name="add_options" value="min_walking"/>
