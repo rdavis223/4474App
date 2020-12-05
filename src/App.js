@@ -3,14 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import Map from './map.jsx'
 import MenuButton from './MenuButton.jsx'
+import RoutesButton from './RoutesButton.jsx'
 import PlanYourTripTab from './PlanYourTripTab.jsx'
+import BusRoutesTab from './RoutesTab.jsx'
 
 var defaultVal = {
-  center: {lat: 40.73, lng: -73.93}, 
+  center: {lat: 42.962896, lng: -81.197274}, 
   zoom: 12
 }
+
 const mapWidthFull = {width: "100%"};
-const mapWidthTab = {width: "70vw", float: "right"};
+const mapWidthPlanRouteTab = {width: "70vw", marginLeft: "30vw"};
+const mapWidthBusRoutesTab = {width: "86vw", marginRight: "14vw"}
+const mapWidthBothTabs = {width: "56vw", marginLeft: "30vw"}
 class App extends Component {
   
   constructor(props) {
@@ -18,19 +23,21 @@ class App extends Component {
      
      this.state = {
        planRouteTabVisable: false,
+       busRoutesTabVisable: false,
        mapWidth: mapWidthFull,
        route_data: null,
        display_routes: false,
        sort_by: null,
        mapPolyline: null,
-       mapBounds: null
+       mapBounds: null,
+       busPolyline: null,
+       busColour: '#00ffff'
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
-     this.plotRoute = this.plotRoute.bind(this);
+     this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
-
-  };
-
+     this.displayBusPolyline = this.displayBusPolyline.bind(this);
+    };
 
   displayPolyline(polyline, bounds){
     this.setState({
@@ -57,6 +64,25 @@ class App extends Component {
         this.state.sort_by = "transfers";
       }
     }
+
+    var time_options = document.getElementsByName("time_options");
+    for (var index in time_options){
+      if (time_options[index].checked){
+        if (time_options[index].value == "now"){
+          break;
+        } else {
+          var eID = time_options[index].value + "_at_input";
+          var time = new Date(document.getElementById(eID).value).getTime();
+          time = (time/1000).toString()
+          if (time_options[index].value == "arriving"){
+            params["arrival_time"] = time;
+          } else if (time_options[index].value == "leaving"){
+            params["departure_time"] = time;
+          }
+        }
+    }
+    }
+    
     var url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?";
     for (var key in params){
       var value = params[key];
@@ -67,6 +93,12 @@ class App extends Component {
     return url
   }
 
+  displayBusPolyline(polyline, bColour){
+    this.setState({
+      busPolyline: polyline,
+      busColour: bColour
+    })
+  }
   plotRoute(){
     var url = this.buildRequestUrl();
 
@@ -80,29 +112,56 @@ class App extends Component {
     })
   }
 
+  resizeTabs(){
+    if (this.state.planRouteTabVisable && this.state.busRoutesTabVisable){
+      return mapWidthBothTabs;
+    } else if (this.state.planRouteTabVisable) {
+      return mapWidthPlanRouteTab;
+    } else if (this.state.busRoutesTabVisable){
+      return mapWidthBusRoutesTab;
+    } else {
+      return mapWidthFull;
+    }
+  }
+
   toggleRouteButton(){
     var newMapWidth = "";
-    if (this.state.planRouteTabVisable){
-      newMapWidth = mapWidthFull;
-    } else {
-      newMapWidth = mapWidthTab;
-    }
+    this.state.planRouteTabVisable = !this.state.planRouteTabVisable;
+
+    newMapWidth = this.resizeTabs();
     this.setState(
       {
-        planRouteTabVisable: !this.state.planRouteTabVisable,
         mapWidth: newMapWidth
       }
       
     );
     console.log(this.state.planRouteTabVisable);
-
   }
+
+  toggleBusRoutesButton(){
+    var newMapWidth = "";
+    this.state.busRoutesTabVisable = !this.state.busRoutesTabVisable;
+    if (!this.state.busRoutesTabVisable){
+      this.displayBusPolyline([], "00ffff");
+    }
+    newMapWidth = this.resizeTabs();
+    this.setState(
+      {
+        mapWidth: newMapWidth
+      }
+      
+    );
+    console.log(this.state.busRoutesTabVisable);
+  }
+
   render() {
     return (
-      <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds}/>
+      <div>      
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
+      <RoutesButton handleClick={this.toggleBusRoutesButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
+      <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
       </div>
       
       );

@@ -49,7 +49,9 @@ class PlanYourTripTab extends Component {
                     transfers: buses.length - 1,
                     walking : walking_distance,
                     polyline: data[route].overview_polyline.points,
-                    bounds: data[route].bounds
+                    bounds: data[route].bounds,
+                    arrival: r.arrival_time.text,
+                    departure: r.departure_time.text
                 }
 
                 this.data.push(element)
@@ -84,7 +86,7 @@ class PlanYourTripTab extends Component {
             }
         }   
 
-
+        var min_date = new Date().toISOString()
         return (
             <div id="PlanYourTripContainer" className={ visability }>
                 <div id="CloseButtonContainer">
@@ -106,6 +108,18 @@ class PlanYourTripTab extends Component {
                 </div>
                 <div className="innerForm">
                     <div id="AdditionalOptionsContainer">
+                        <div id="TimeOptionsContainer">
+                            <label><input type="radio" id="time_now" name="time_options" value="now"/>Leaving Now</label><br/>
+                            <label><input type="radio" id="time_leaving" name="time_options" value="leaving"/>
+                            Leaving At:</label>
+                            <input type="datetime-local" id="leaving_at_input"
+                            name="meeting-time" 
+                            /><br/>
+                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arrving At:</label>
+                            <input type="datetime-local" id="arriving_at_input"
+                            name="meeting-time" />
+                            <br/>
+                        </div>
                         <AdditionalOptions/>
                         <div id= "FindRoute">
                             <button onClick={this.props.handlePlot} className="FindRouteButton"> Find Route</button>
