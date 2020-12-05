@@ -37,6 +37,7 @@ class App extends Component {
      this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
      this.displayBusPolyline = this.displayBusPolyline.bind(this);
+     this.plotRoute = this.plotRoute.bind(this);
     };
 
   displayPolyline(polyline, bounds){
@@ -47,7 +48,7 @@ class App extends Component {
   }
   buildRequestUrl(){
     var params = {}
-    params['key'] = "AIzaSyD8LiaQi4w3UySiDfi_38xpGvJ2iqFv7Hk";
+    params['key'] = "AIzaSyCoheb6kohffzpBDMu5-YJQg5UGSQrBIo0";
     params['mode'] = "transit"
     params['transit_mode'] = "bus"
     params['origin'] = document.getElementById("StartAddress").value;
