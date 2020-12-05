@@ -13,9 +13,9 @@ var defaultVal = {
 }
 
 const mapWidthFull = {width: "100%"};
-const mapWidthTab = {width: "70vw", float: "right"};
-const mapWidthRoutesTab = {width: "86vw", float: "left"}
-
+const mapWidthPlanRouteTab = {width: "70vw", marginLeft: "30vw"};
+const mapWidthBusRoutesTab = {width: "86vw", marginRight: "14vw"}
+const mapWidthBothTabs = {width: "56vw", marginLeft: "30vw"}
 class App extends Component {
   
   constructor(props) {
@@ -112,16 +112,25 @@ class App extends Component {
     })
   }
 
+  resizeTabs(){
+    if (this.state.planRouteTabVisable && this.state.busRoutesTabVisable){
+      return mapWidthBothTabs;
+    } else if (this.state.planRouteTabVisable) {
+      return mapWidthPlanRouteTab;
+    } else if (this.state.busRoutesTabVisable){
+      return mapWidthBusRoutesTab;
+    } else {
+      return mapWidthFull;
+    }
+  }
+
   toggleRouteButton(){
     var newMapWidth = "";
-    if (this.state.planRouteTabVisable){
-      newMapWidth = mapWidthFull;
-    } else {
-      newMapWidth = mapWidthTab;
-    }
+    this.state.planRouteTabVisable = !this.state.planRouteTabVisable;
+
+    newMapWidth = this.resizeTabs();
     this.setState(
       {
-        planRouteTabVisable: !this.state.planRouteTabVisable,
         mapWidth: newMapWidth
       }
       
@@ -130,16 +139,14 @@ class App extends Component {
   }
 
   toggleBusRoutesButton(){
-    var newMapWidth = ""
-    if (this.state.busRoutesTabVisable){
-      newMapWidth = mapWidthFull;
-      this.displayBusPolyline([], "00ffff")
-    } else {
-      newMapWidth = mapWidthRoutesTab;
+    var newMapWidth = "";
+    this.state.busRoutesTabVisable = !this.state.busRoutesTabVisable;
+    if (!this.state.busRoutesTabVisable){
+      this.displayBusPolyline([], "00ffff");
     }
+    newMapWidth = this.resizeTabs();
     this.setState(
       {
-        busRoutesTabVisable: !this.state.busRoutesTabVisable,
         mapWidth: newMapWidth
       }
       

@@ -101,15 +101,13 @@ class PlanYourTripTab extends Component {
                 <div className="innerForm">
                     <div id="AdditionalOptionsContainer">
                         <div id="TimeOptionsContainer">
-                            <input type="radio" id="time_now" name="time_options" value="now"/>
-                            <label for="time_now">Leaving Now</label><br/>
-                            <input type="radio" id="time_leaving" name="time_options" value="leaving"/>
-                            <label for="time_leaving">Leaving At:</label>
+                            <label><input type="radio" id="time_now" name="time_options" value="now"/>Leaving Now</label><br/>
+                            <label><input type="radio" id="time_leaving" name="time_options" value="leaving"/>
+                            Leaving At:</label>
                             <input type="datetime-local" id="leaving_at_input"
                             name="meeting-time" 
                             /><br/>
-                            <input type="radio" id="time_arriving" name="time_options" value="arriving"/>
-                            <label for="time_arriving">Arrving At:</label>
+                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arrving At:</label>
                             <input type="datetime-local" id="arriving_at_input"
                             name="meeting-time" />
                             <br/>

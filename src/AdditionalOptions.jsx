@@ -24,10 +24,11 @@ class AdditionalOptions extends Component {
                 <button className="Buttons" onClick={this.toggleMenu}> Show Additional Options </button>
                 { this.state.showAddOptions ? (
                 <div id="AddOptionsMenu">
+                    <label>
                      <input type="radio" id="min_walking" name="add_options" value="min_walking"/>
-                        <label for="min_walking">Minimize Walking</label><br/>
-                        <input type="radio" id="min_transfers" name="add_options" value="min_transfers"/>
-                        <label for="min_transfers">Minimize Transfers</label><br/>
+                        Minimize Walking</label><br/>
+                        <label><input type="radio" id="min_transfers" name="add_options" value="min_transfers"/>
+                        Minimize Transfers</label><br/>
                 </div>
                 ) : (null)
 

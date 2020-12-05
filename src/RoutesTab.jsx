@@ -15,7 +15,7 @@ class RoutesTab extends Component
         coorPoints = this.getRoutesList();
         buttons = []
         for (let i = 0; i < csvValues.length; i++) {
-            buttons.push(<button
+            buttons.push(<button key = {i}
                 style = {{width: 200, height: 40, backgroundColor:('#'+ csvValues[i][1])}}
                 onClick={() => this.props.handleBusRouteClicked(coorPoints[csvValues[i][2]], '#'+ csvValues[i][1])}>
                 {csvValues[i][0]}
