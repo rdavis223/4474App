@@ -31,12 +31,17 @@ class App extends Component {
        mapPolyline: null,
        mapBounds: null,
        busPolyline: null,
-       busColour: '#00ffff'
+       busColour: '#00ffff',
+       busHoverPoly: null,
+       busHoverColour: '#00ffff',
+       lastPressed:null,
+       busBounds:null
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
      this.displayBusPolyline = this.displayBusPolyline.bind(this);
+     this.displayBusHoverPolyline = this.displayBusHoverPolyline.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
     };
 
@@ -94,10 +99,19 @@ class App extends Component {
     return url
   }
 
-  displayBusPolyline(polyline, bColour){
+  displayBusPolyline(polyline, bColour, bounds){
     this.setState({
       busPolyline: polyline,
-      busColour: bColour
+      busColour: bColour,
+      busBounds: bounds,
+      lastPressed: 'Full'
+    })
+  }
+  displayBusHoverPolyline(polyline, bColour){
+    this.setState({
+      busHoverPolyline: polyline,
+      busHoverColour: bColour,
+      lastPressed: 'Hover'
     })
   }
   plotRoute(){
@@ -143,7 +157,8 @@ class App extends Component {
     var newMapWidth = "";
     this.state.busRoutesTabVisable = !this.state.busRoutesTabVisable;
     if (!this.state.busRoutesTabVisable){
-      this.displayBusPolyline([], "00ffff");
+      this.displayBusPolyline([], "00ffff", null);
+      this.displayBusHoverPolyline([], "00ffff");
     }
     newMapWidth = this.resizeTabs();
     this.setState(
@@ -158,11 +173,11 @@ class App extends Component {
   render() {
     return (
       <div>      
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour}/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} busHoverPoly = {this.state.busHoverPolyline} busHoverCol={this.state.busHoverColour} buttonType = {this.state.lastPressed} busRouteBounds = {this.state.busBounds}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
-      <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
+      <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline} handleBusRouteHover = {this.displayBusHoverPolyline}/>
       </div>
       
       );
