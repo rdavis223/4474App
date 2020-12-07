@@ -65,7 +65,7 @@ class PlanYourTripTab extends Component {
             }
             for (var index in this.data){
                 var elem = this.data[index];
-                items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds)}> 
+                items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds, index)}> 
                                 ------------<br/>
                                 Buses: {elem.buses.toString()} <br/>
                                 Distance: {elem.distance.text} <br/>
