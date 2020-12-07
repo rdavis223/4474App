@@ -115,7 +115,7 @@ class PlanYourTripTab extends Component {
                             <input type="datetime-local" id="leaving_at_input"
                             name="meeting-time" 
                             /><br/>
-                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arrving At: </label>
+                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arriving At: </label>
                             <input type="datetime-local" id="arriving_at_input"
                             name="meeting-time" />
                             <br/>
