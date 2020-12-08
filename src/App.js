@@ -12,6 +12,9 @@ var defaultVal = {
   zoom: 12
 }
 
+// CEEPS
+var arrivalVal = {lat: 43.00738223906186, lng: -81.26169367032458}
+var destinationVal = {lat: 42.99253105656541, lng: -81.25222223247258};
 const mapWidthFull = {width: "100%"};
 const mapWidthPlanRouteTab = {width: "70vw", marginLeft: "30vw"};
 const mapWidthBusRoutesTab = {width: "86vw", marginRight: "14vw"}
@@ -22,6 +25,8 @@ class App extends Component {
      super(props);
      
      this.state = {
+       arrVal: arrivalVal,
+       desVal: destinationVal,
        planRouteTabVisable: false,
        busRoutesTabVisable: false,
        mapWidth: mapWidthFull,
@@ -46,6 +51,7 @@ class App extends Component {
       mapBounds: bounds
     })
   }
+
   buildRequestUrl(){
     var params = {}
     params['key'] = "AIzaSyCoheb6kohffzpBDMu5-YJQg5UGSQrBIo0";
@@ -158,7 +164,7 @@ class App extends Component {
   render() {
     return (
       <div>      
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour}/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
