@@ -63,15 +63,18 @@
 
   #DirItemsContainer {
     margin: 30px 30px;
+    overflow-y: scroll;
+    height: calc(100vh - 160px);
   }
 
   #DirectionItems {
     margin-bottom: 20px;
     border-radius: 20px;
     padding: 10px;
-    background-color: #ffe8eb;
-    border: 2px solid #ff425f;
+    background-color: #ffdee2;
     line-height: 120%;
+    border-top: 2px solid #ff425f;
+    border-bottom: 2px solid #ff425f;
   }
 
   .innerDirections{
