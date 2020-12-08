@@ -8,6 +8,8 @@ import PlanYourTripTab from './PlanYourTripTab.jsx'
 import Directions from './Directions.jsx'
 import BusRoutesTab from './RoutesTab.jsx'
 import { FusionTablesLayer } from "react-google-maps";
+import StopsTab from './StopsTab.jsx'
+import StopsButton from './StopsButton'
 
 var defaultVal = {
   center: {lat: 42.962896, lng: -81.197274}, 
@@ -18,6 +20,9 @@ const mapWidthFull = {width: "100%"};
 const mapWidthPlanRouteTab = {width: "70vw", marginLeft: "30vw"};
 const mapWidthBusRoutesTab = {width: "86vw", marginRight: "14vw"}
 const mapWidthBothTabs = {width: "56vw", marginLeft: "30vw"}
+
+const mapHeightFull = {height: "100%"}
+const mapHeightStopsTabs = {height: "40vw", marginBottom: "0vw"}
 class App extends Component {
   
   constructor(props) {
@@ -26,7 +31,9 @@ class App extends Component {
      this.state = {
        planRouteTabVisable: false,
        busRoutesTabVisable: false,
+       stopsTabVisible: false,
        mapWidth: mapWidthFull,
+       mapHeight: mapHeightFull,
        route_data: null,
        display_routes: false,
        sort_by: null,
@@ -35,6 +42,11 @@ class App extends Component {
        busPolyline: null,
        busColour: '#00ffff',
        directionsVisable: false
+       stopsData:null,
+       renderStops:false,
+       stopname:"",
+       stopInfo:null,
+       stopZoom:"Marker"
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
@@ -42,6 +54,12 @@ class App extends Component {
      this.displayBusPolyline = this.displayBusPolyline.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
      this.closeDirectionsPage = this.closeDirectionsPage.bind(this);
+     this.displayStops = this.displayStops.bind(this);
+     this.activateStopsTab = this.activateStopsTab.bind(this);
+     this.closeStopsTab = this.closeStopsTab.bind(this);
+     this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
+     this.stopsVisible = this.stopsVisible.bind(this);
+     this.proccessStop = this.proccessStop.bind(this);
     };
 
   displayPolyline(polyline, bounds, index){
@@ -148,8 +166,7 @@ class App extends Component {
     this.setState(
       {
         mapWidth: newMapWidth
-      }
-      
+      }  
     );
     console.log(this.state.planRouteTabVisable);
   }
@@ -170,12 +187,79 @@ class App extends Component {
     console.log(this.state.busRoutesTabVisable);
   }
 
+  activateStopsTab()
+  {
+    this.state.stopsTabVisible = true;
+    this.setState(
+      {
+        mapHeight: mapHeightStopsTabs,
+        stopZoom:"Marker"
+      }  
+    );
+  }
+
+  closeStopsTab()
+  {
+    this.state.stopsTabVisible = false;
+    this.setState(
+      {
+        mapHeight: mapHeightFull,
+        stopZoom:"Marker"
+      }  
+    ); 
+  }
+  displayStops(data)
+  {
+    this.setState({
+      stopsData:data
+    })
+  }
+
+  stopsVisible()
+  {
+    if (this.state.renderStops){
+      this.setState({
+      renderStops:false,
+      mapHeight:mapHeightFull,
+      stopsTabVisible:false,
+      stopZoom:"Marker"
+    })
+    }
+    else
+    {    
+      this.setState({
+      renderStops:true,
+      stopZoom:"Zoom"
+    })
+    }
+  }
+
+  proccessStop(values)
+  {
+      var stopinfo = [];
+      for (var entry in values)
+      {
+          var stopName = values[entry]['stop_name'];
+          stopinfo.push(<div key = {values[entry]['route_id']} class={"block"} style = {{width: 200, height: 40, backgroundColor:('#'+ values[entry]['route_color'])}}>
+             {values[entry]['route_id']}
+          </div>
+          )
+      }
+      this.setState({
+        stopname:stopName,
+        stopInfo:stopinfo
+      })
+      this.activateStopsTab();
+  }
+
   render() {
     return (
       <div>      
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour}/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } mapHeight={ this.state.mapHeight } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} sData = {this.state.stopsData} renderStops = {this.state.renderStops} stopZoom = {this.state.stopZoom}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
+      <StopsButton handleClick={this.stopsVisible}/>
+      <StopsTab proccessStop = {this.proccessStop} stopname = {this.state.stopname} stopInfo = {this.state.stopInfo} menuVisibility = { this.state.stopsTabVisible } menuWidth = {this.state.mapWidth} handleClick = {this.activateStopsTab} closeStops = {this.closeStopsTab} handleStopsClicked = {this.displayStops}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
       { this.state.directionsVisable ?

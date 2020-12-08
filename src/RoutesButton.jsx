@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './RoutesButton.css';
 
-class MenuButton extends Component{
+class RoutesButton extends Component{
     render() {
         return (
             <button id="BusRoutesButton" 
@@ -12,4 +12,4 @@ class MenuButton extends Component{
       }
 }
      
-export default MenuButton;
+export default RoutesButton;

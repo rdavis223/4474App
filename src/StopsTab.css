@@ -1,0 +1,40 @@
+#StopsTabContainer {
+    width: 100vw;
+    height: 20vh;
+    background-color: #FFE600;
+    position: fixed;
+    bottom: 0;
+    transition: transform .3s
+                cubic-bezier(0, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+  }
+  #StopsTabContainer.hide {
+    transform: translate3d(0, 100vh, 0);
+  }
+  #StopsTabContainer.show {
+    transform: translate3d(0, 0vh, 0);
+    overflow: hidden;
+  }
+  #StopsTabContainer h2 a {
+    color: #333;
+    margin-bottom: 15px;
+    text-decoration: none;
+  }
+  #StopsTabContainer h2 a:hover {
+    text-decoration: underline;
+  }
+  .innerForm{
+    padding-bottom: 10px;
+  }
+  #Stops
+  {
+    display: inline-block;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 60px;
+    white-space:nowrap
+  }
+  .block {
+    display: inline-block;
+  }
