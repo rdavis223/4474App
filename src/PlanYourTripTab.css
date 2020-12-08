@@ -135,7 +135,7 @@
 }
 
 #RoutesBox {
-  height: calc(100vh - 440px);
+  height: calc(100vh - 600px);
   overflow-y: scroll;
   margin-top: 20px;
 }
@@ -145,13 +145,35 @@
   background-color: #8e44e3;
   border-radius: 10px;
   margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
   opacity: 1;
-  display: flex;
-  justify-content: space-between;
 }
 
 .RoutesOption:hover {
   opacity: 0.7;
+}
+
+.RoutesOption hr {
+  border: 2px solid white; 
+  border-radius: 10px;
+  opacity: 0.6;
+}
+
+.flexContainer {
+  justify-content: space-between;
+  display: flex;
+}
+
+.flexContainer h1 {
+  font-size: 14px;
+  display: inline;
+}
+
+.flexContainer h2 {
+  font-size: 14px;
+  display: inline;
+  font-weight: normal;
 }
 
 .leftBox {
@@ -159,8 +181,8 @@
   float: left;
   color: white;
   line-height: 150%;
-  font-weight: bold;
   font-size: 17px;
+  margin-bottom: 5px;
 }
 
 .rightBox {
@@ -170,6 +192,7 @@
   line-height: 150%;
   font-size: 17px;
   text-align: right;
+  margin-bottom: 5px;
 }
 
 #AddOptionsMenu {

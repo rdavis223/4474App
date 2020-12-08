@@ -65,24 +65,40 @@ class PlanYourTripTab extends Component {
             }
             for (var index in this.data){
                 var elem = this.data[index];
-                items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds)}> 
-                                <div className="RoutesOption">
-                                    <div className="leftBox">
-                                        Buses:<br />
-                                        Distance:<br />
-                                        Duration:<br />
-                                        Transfers:<br />
-                                        Walking:<br />
-                                    </div>
-                                    <div className="rightBox">
-                                        {elem.buses.toString()}<br />
-                                        {elem.distance.text}<br />
-                                        {elem.duration.text}<br />
-                                        {elem.transfers}<br />
-                                        {elem.walking.toString() + "kms"}<br />
-                                    </div>
-                                </div>
-                            </div>   );
+                items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds, index)}> 
+                    <div className="RoutesOption">
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <b>Depart At:</b> {elem.departure}
+                            </div>
+                            <div className="rightBox">
+                                <b>Arriving At:</b> {elem.arrival}
+                            </div>
+                        </div>
+                        <hr /> 
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <b>Buses to Take:</b><br />
+                                <b>Distance:</b><br />
+                                <b>Duration:</b><br />
+                            </div>
+                            <div className="rightBox">
+                                {elem.buses.toString()}<br />
+                                {elem.distance.text}<br />
+                                {elem.duration.text}<br />
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <h1><b>Transfers:</b> </h1><h2>{elem.transfers}</h2>
+                            </div>
+                            <div className="rightBox">
+                                <h1><b>Walking:</b> </h1><h2>{elem.walking.toString() + " km"}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>   );
             }
         }   
 

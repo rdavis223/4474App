@@ -1,0 +1,78 @@
+#StopsTabContainer {
+    width: 100vw;
+    height: 25vh;
+    border-style: solid;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    transition: transform .3s
+                cubic-bezier(0, .52, 0, 1);
+    overflow: scroll;
+    z-index: 1000;
+    box-shadow: 1px 1px 20px #616161;
+  }
+
+  #StopsTabContainer.hide {
+    transform: translate3d(0, 100vh, 0);
+  }
+  #StopsTabContainer.show {
+    transform: translate3d(0, 0vh, 0);
+    overflow: hidden;
+  }
+  #StopsTabContainer h2 a {
+    color: #333;
+    margin-bottom: 15px;
+    text-decoration: none;
+  }
+  #StopsTabContainer h2 a:hover {
+    text-decoration: underline;
+  }
+  .innerForm{
+    padding-bottom: 10px;
+  }
+  #Stops
+  {
+    display: inline-block;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 60px;
+    white-space:nowrap
+  }
+  .block {
+    display: inline-block;
+  }
+
+  #StopCloseButtonContainer {
+    text-align: left;
+    background-color: #8e44e3;
+    padding-right: 2px;
+    padding-top: 2px;
+  }
+  
+  .StopCloseButton {
+    background: #8e44e3;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border-style: none;
+  }
+  
+  .StopCloseButton:hover {
+    background: white;
+    color: #8e44e3;
+  }
+  
+  #StopTitleContainer {
+    background-color: #8e44e3;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  #StopContent {
+    padding-left: 30px;
+    padding-right: 30px;
+  }

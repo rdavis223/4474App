@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import './RoutesButton.css';
+import './StopsButton.css';
 
-class RoutesButton extends Component{
+class StopsButton extends Component{
     render() {
         return (
-            <button id="BusRoutesButton" 
+            <button id="StopsButton" 
             style = {{width: 160, height: 60}}
             onClick= {this.props.handleClick}>
-                Bus Routes</button>
+                Show Stops</button>
         );
       }
 }
      
-export default RoutesButton;
+export default StopsButton;
