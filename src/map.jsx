@@ -1,51 +1,44 @@
 import React, { Component } from "react";
-import { LoadScript, GoogleMap, Marker, Polyline } from '@react-google-maps/api';
+import { LoadScript, GoogleMap, Marker, Polyline, Symbol } from '@react-google-maps/api';
 import decodePolyline from 'decode-google-map-polyline';
 import './map.css';
+// import red_pin from './images/red_pin.svg';
 import { fitBounds } from "google-map-react";
 
 class Map extends Component {
     constructor(props){
         super(props);
         this.map = null;
-        this.Arrival_Marker = null;
-        this.Departure_Marker = null;
         this.arrMarker = props.arrMarker;
         this.desMarker = props.desMarker;
-        this.updateArrival = props.updateArrival;
-        this.updateDeparture = props.updateDeparture;
-
-        this.onMarkerMounted = element => {
-            this.setState(prevState => ({
-                markers: [...prevState.markers, element.marker]
-            }))
-        }
+        this.startAddress = document.getElementById("StartAddress")
+        this.endAddress = document.getElementById("EndAddress")
+        this.inputFields = document.getElementById("InputFieldsContainer")
     }
 
-    arrivalUpdate() {
-        const arrival_marker_lat = this.Arrival_Marker.getPosition().lat();
-        const arrival_marker_lng = this.Arrival_Marker.getPosition().lng();
-        const coords = new window.google.maps.LatLng(arrival_marker_lat, arrival_marker_lng)
-        // console.log("Lat: " + arrival_marker_lat + "\nLng: " + arrival_marker_lng + "\nCoords: " + coords)
+    endUpdate() {
+        const end_marker_lat = this.End_Marker.getPosition().lat();
+        const end_marker_lng = this.End_Marker.getPosition().lng();
+        const coords = new window.google.maps.LatLng(end_marker_lat, end_marker_lng)
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({location: coords}, (results, status) => {
           if (status === "OK") {
-            document.getElementById("StartAddress").value = results[0].formatted_address
+            document.getElementById("EndAddress").value = results[0].formatted_address
           } else {
             console.log("Geocode Unsuccessful")
           }
         });
     }
 
-    departureUpdate() {
-        const departure_marker_lat = this.Departure_Marker.getPosition().lat();
-        const departure_marker_lng = this.Departure_Marker.getPosition().lng();
-        const coords = new window.google.maps.LatLng(departure_marker_lat, departure_marker_lng)
+    startUpdate() {
+        const start_marker_lat = this.Start_Marker.getPosition().lat();
+        const start_marker_lng = this.Start_Marker.getPosition().lng();
+        const coords = new window.google.maps.LatLng(start_marker_lat, start_marker_lng)
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({location: coords}, (results, status) => {
           if (status === "OK") {
             // console.log(results)
-            document.getElementById("EndAddress").value = results[0].formatted_address
+            document.getElementById("StartAddress").value = results[0].formatted_address
           } else {
             console.log("Geocode Unsuccessful")
           }
@@ -67,6 +60,7 @@ class Map extends Component {
         // var destinationAddress = "lat: 42.99253105656541, lng: -81.25222223247258";
         var coordinates = null;
         var buscoor = null;
+        // var red_pin = new window.google.maps.Symbol("./images/red_pin.svg")
 
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
@@ -103,26 +97,24 @@ class Map extends Component {
                 }                     
                 <Marker 
                 onLoad = { marker => {
-                    this.Arrival_Marker = marker;
+                    this.End_Marker = marker;
+                    window.End_Marker = marker;
                 }}
-                    id = 'arrival_pin'
                     draggable = {true}
-                    onDragEnd = {() => { this.arrivalUpdate() }}
-                    title = 'The Ceeps'
-                    label = "Arrival"
+                    onDragEnd = {() => { this.endUpdate() }}
+                    label = "Destination"               
                     clickable = {true}
                     defaultClickable = {true}
                     position = {{ lat: arrLat, lng: arrLng }}
                 />
                 <Marker 
                 onLoad = { marker => {
-                    this.Departure_Marker = marker;
+                    this.Start_Marker = marker;
+                    window.Start_Marker = marker;
                 }}
-                    id = 'destination_pin'
                     draggable = {true}
-                    onDragEnd = {() => { this.departureUpdate() }}
-                    title = 'Broughdale'
-                    label = "Destination"
+                    onDragEnd = {() => { this.startUpdate() }}
+                    label = "Starting"
                     clickable = {true}
                     defaultClickable = {true}
                     position = {{ lat: desLat, lng: desLng }}

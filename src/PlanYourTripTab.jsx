@@ -19,6 +19,22 @@ class PlanYourTripTab extends Component {
         endBox.value = startValue;
 
     }
+
+    updateStart() {
+        console.log("Running")
+        if (document.getElementById("StartAddress") != null) {
+            const address = document.getElementById("StartAddress").value;
+            const geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({address: address}, (results, status) => {
+                if (status === "OK") {
+                    window.Departure_Marker.setPosition(results[0].geometry.location)
+                } else {
+                    console.log("Geocode Unsuccessful")
+                }
+            });
+        }
+    }
+
     render() {
         this.data = []
         var visability = "hide"
@@ -91,7 +107,7 @@ class PlanYourTripTab extends Component {
                     <div id="SwitchLogoContainer">
                         <div className="SwitchLogo" onClick= {this.switchAddy}></div>
                     </div>
-                    <div id="InputFieldsContainer">
+                    <div id="InputFieldsContainer" >
                         <p>Leaving From: </p>
                         <SearchBox inputID="StartAddress"/>
                         <p>Going To: </p>
