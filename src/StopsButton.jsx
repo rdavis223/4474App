@@ -5,9 +5,9 @@ class StopsButton extends Component{
     render() {
         return (
             <button id="StopsButton" 
-            style = {{width: 160, height: 30}}
+            style = {{width: 160, height: 60}}
             onClick= {this.props.handleClick}>
-                Stops</button>
+                Show Stops</button>
         );
       }
 }

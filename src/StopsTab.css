@@ -1,14 +1,17 @@
 #StopsTabContainer {
     width: 100vw;
     height: 20vh;
-    background-color: #FFE600;
+    border-style: solid;
+    background-color: white;
     position: fixed;
     bottom: 0;
     transition: transform .3s
                 cubic-bezier(0, .52, 0, 1);
     overflow: scroll;
     z-index: 1000;
+    box-shadow: 1px 1px 20px #616161;
   }
+
   #StopsTabContainer.hide {
     transform: translate3d(0, 100vh, 0);
   }
