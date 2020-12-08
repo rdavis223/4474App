@@ -4,6 +4,7 @@ import './App.css';
 import Map from './map.jsx'
 import MenuButton from './MenuButton.jsx'
 import PlanYourTripTab from './PlanYourTripTab.jsx'
+// import Geocoder from "google.maps.Geocoder";
 
 var defaultVal = {
   center: {lat: 42.99253105656541, lng: -81.25222223247258}, 
@@ -40,14 +41,35 @@ class App extends Component {
 
   };
 
-  updateArrival(newPosition) {
-    arrivalVal = newPosition;
-    document.getElementById("EndAddress").value = arrivalVal;
+  updateArrival() {
+    const pos = this.state.arrVal.lat;
+    console.log("Updating Position..." + pos);
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({location: pos}, (results, status) => {
+      if (status === "OK") {
+        console.log(results)
+      } else {
+        console.log("Geocode Unsuccessful")
+      }
+    });
+    
+    
+    // var reverseGeocodeRequest = "https://maps.googleapis.com/maps/api/geocode/json?latlng="
+    //   + this.state.arrVal.lat + "," + this.state.arrVal.lng + "&key="
+    // fetch(reverseGeocodeRequest)
+    // .then(response => response.json()).then(data => {
+    //   console.log(data);
+    //   if (document.getElementById("EndAddress") != null) {
+    //     document.getElementById("EndAddress").value = "test1";
+    //   }
+    // })
   }
 
   updateDeparture(newPosition) {
     destinationVal = newPosition;
-    document.getElementById("StartAddress").value = arrivalVal;
+    if (document.getElementById("StartAddress") != null) {
+      document.getElementById("StartAddress").value = "test2";
+    }
   }
 
   displayPolyline(polyline, bounds){
@@ -58,7 +80,7 @@ class App extends Component {
   }
   buildRequestUrl(){
     var params = {}
-    params['key'] = "AIzaSyD8LiaQi4w3UySiDfi_38xpGvJ2iqFv7Hk";
+    params['key'] = "xxx";
     params['mode'] = "transit"
     params['transit_mode'] = "bus"
     params['origin'] = document.getElementById("StartAddress").value;

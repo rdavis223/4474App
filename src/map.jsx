@@ -14,11 +14,6 @@ class Map extends Component {
         this.updateDeparture = props.updateDeparture;
     }
 
-    // onArrPositionChanged() {
-    //     arrLat = this.getPosition().lat;
-    //     arrLng = this.getPosition().lng;
-    // }
-
     // componentDidMount(){
     //     var test_bounds =  {
     //         ne: { lat: 52.6754542, lng: 13.7611175 },
@@ -65,7 +60,10 @@ class Map extends Component {
                 <Marker 
                     id = 'arrival_pin'
                     draggable = {true}
-                    onDragEnd = {this.props.updateArrival(this.position)}
+                    onDragEnd = {() => {
+                        console.log();
+                        this.props.updateArrival();
+                    }}
                     title = 'The Ceeps'
                     label = "Arrival"
                     clickable = {true}
@@ -75,7 +73,7 @@ class Map extends Component {
                 <Marker 
                     id = 'destination_pin'
                     draggable = {true}
-                    onDragEnd = {this.props.updateDeparture(this.position)}
+                    onDragEnd = {() => {this.props.updateDeparture(this.position)}}
                     title = 'Broughdale'
                     label = "Destination"
                     clickable = {true}
