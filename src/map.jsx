@@ -3,7 +3,6 @@ import { LoadScript, GoogleMap, Marker, Polyline, Symbol } from '@react-google-m
 import decodePolyline from 'decode-google-map-polyline';
 import './map.css';
 // import red_pin from './images/red_pin.svg';
-import { fitBounds } from "google-map-react";
 
 class Map extends Component {
     constructor(props){
