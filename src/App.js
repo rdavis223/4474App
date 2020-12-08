@@ -45,6 +45,7 @@ class App extends Component {
     };
 
   displayPolyline(polyline, bounds, index){
+    console.log(polyline);
     this.setState({
       mapPolyline: polyline,
       mapBounds: bounds,
@@ -61,26 +62,26 @@ class App extends Component {
     })
   }
 
-  buildRequestUrl(){
+  plotRoute(){
     var params = {}
-    params['key'] = "AIzaSyCoheb6kohffzpBDMu5-YJQg5UGSQrBIo0";
-    params['mode'] = "transit"
-    params['transit_mode'] = "bus"
+    params['travelMode'] = "TRANSIT"
+    params['transitOptions'] = {
+      modes: ['BUS']
+    }
     params['origin'] = document.getElementById("StartAddress").value;
     params['destination'] = document.getElementById("EndAddress").value;
-    params['alternatives'] = "true";
+    params['provideRouteAlternatives'] = true;
     var min_walking = document.getElementById("min_walking");
     var min_transfers = document.getElementById("min_transfers");
     if (min_walking !== null && min_transfers !==null ){
       if (min_walking.checked){
         this.state.sort_by = "walking";
-        params['transit_routing_preference'] = 'less_walking';
+        params['transitOptions']['routingPreference'] = 'less_walking';
       } else if (min_transfers.checked){
-        params['transit_routing_preference'] = 'fewer_transfers';
+        params['transitOptions']['routingPreference'] = 'fewer_transfers';
         this.state.sort_by = "transfers";
       }
     }
-
     var time_options = document.getElementsByName("time_options");
     for (var index in time_options){
       if (time_options[index].checked){
@@ -88,25 +89,28 @@ class App extends Component {
           break;
         } else {
           var eID = time_options[index].value + "_at_input";
-          var time = new Date(document.getElementById(eID).value).getTime();
-          time = (time/1000).toString()
+          var time = new Date(document.getElementById(eID).value)
           if (time_options[index].value == "arriving"){
-            params["arrival_time"] = time;
+            params['transitOptions']["arrivalTime"] = time;
           } else if (time_options[index].value == "leaving"){
-            params["departure_time"] = time;
+            params['transitOptions']["departureTime"] = time;
           }
         }
     }
     }
-    
-    var url = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?";
-    for (var key in params){
-      var value = params[key];
-      console.log(value);
-      value = value.replace(/ /g, "+");
-      url += key + "="+ value + "&";
+    var dir = new window.google.maps.DirectionsService()
+    dir.route(params, (response, status) => {
+      console.log(response);
+      if (status === "OK") {
+        this.setState({
+              route_data: response.routes,
+              display_routes: true
+            });
+      } else {
+        window.alert("Directions request failed due to " + status);
+      }
     }
-    return url
+  );
   }
 
   displayBusPolyline(polyline, bColour){
@@ -115,18 +119,7 @@ class App extends Component {
       busColour: bColour,
     })
   }
-  plotRoute(){
-    var url = this.buildRequestUrl();
 
-    fetch(url)
-    .then(response => response.json()).then(data => {
-      console.log(data);
-      this.setState({
-        route_data: data.routes,
-        display_routes: true
-      })
-    })
-  }
 
   resizeTabs(){
     if (this.state.planRouteTabVisable && this.state.busRoutesTabVisable){

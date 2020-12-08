@@ -21,24 +21,24 @@ class Directions extends Component {
             var innerItems = [];
             for (var innerStep in stepData.steps){
                 var innerStepData = stepData.steps[innerStep];
-                if ("html_instructions" in innerStepData){
-                    innerItems.push(<div className = "innerDirections">
-                                    <p dangerouslySetInnerHTML={ {__html : (parseInt(step) + 1).toString() + "." + (parseInt(innerStep) + 1).toString() + " : "+ innerStepData.html_instructions }}></p>
+                if ("instructions" in innerStepData){
+                    innerItems.push(<div key = { innerStep } className = "innerDirections">
+                                    <p dangerouslySetInnerHTML={ {__html : (parseInt(step) + 1).toString() + "." + (parseInt(innerStep) + 1).toString() + " : "+ innerStepData.instructions }}></p>
                                 </div>)
                 }
             }
             
             
-            items.push(<div>
-                        { (parseInt(step) + 1).toString()} : { stepData.html_instructions } <br/>
+            items.push(<div key = { step }>
+                        { (parseInt(step) + 1).toString()} : { stepData.instructions } <br/>
                         Distance: { stepData.distance.text } <br/>
                         Duration: { stepData.duration.text } <br/>
                         {
                             stepData.travel_mode == "TRANSIT" ? (
                                 <div className="innerDirections"> 
-                                Headsign: {stepData.transit_details.headsign} <br/> 
-                                Departing From : Stop: {stepData.transit_details.departure_stop.name}, Time: {stepData.transit_details.departure_time.text} <br/>
-                                Arriving At: Stop: { stepData.transit_details.arrival_stop.name}, Time: { stepData.transit_details.arrival_time.text} <br/></div>
+                                Headsign: {stepData.transit.headsign} <br/> 
+                                Departing From : Stop: {stepData.transit.departure_stop.name}, Time: {stepData.transit.departure_time.text} <br/>
+                                Arriving At: Stop: { stepData.transit.arrival_stop.name}, Time: { stepData.transit.arrival_time.text} <br/></div>
                             ) : (null)
                         }
                         
