@@ -8,21 +8,51 @@ class Map extends Component {
     constructor(props){
         super(props);
         this.map = null;
+        this.Arrival_Marker = null;
+        this.Departure_Marker = null;
         this.arrMarker = props.arrMarker;
         this.desMarker = props.desMarker;
         this.updateArrival = props.updateArrival;
         this.updateDeparture = props.updateDeparture;
+
+        this.onMarkerMounted = element => {
+            this.setState(prevState => ({
+                markers: [...prevState.markers, element.marker]
+            }))
+        }
     }
 
-    // componentDidMount(){
-    //     var test_bounds =  {
-    //         ne: { lat: 52.6754542, lng: 13.7611175 },
-    //         sw: { lat: 52.33962959999999, lng: 13.0891554 },
-    //         }
-    //     console.log(this.map);
-    //     const bounds = new window.google.maps.LatLngBounds();
-    //     this.map.fitBounds(bounds);    
-    // }
+    arrivalUpdate() {
+        const arrival_marker_lat = this.Arrival_Marker.getPosition().lat();
+        const arrival_marker_lng = this.Arrival_Marker.getPosition().lng();
+        const coords = new window.google.maps.LatLng(arrival_marker_lat, arrival_marker_lng)
+        // console.log("Lat: " + arrival_marker_lat + "\nLng: " + arrival_marker_lng + "\nCoords: " + coords)
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({location: coords}, (results, status) => {
+          if (status === "OK") {
+            console.log(results)
+            console.log(document.getElementById("StartAddress").value = results[0].formatted_address)
+          } else {
+            console.log("Geocode Unsuccessful")
+          }
+        });
+    }
+
+    departureUpdate() {
+        const departure_marker_lat = this.Departure_Marker.getPosition().lat();
+        const departure_marker_lng = this.Departure_Marker.getPosition().lng();
+        const coords = new window.google.maps.LatLng(departure_marker_lat, departure_marker_lng)
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({location: coords}, (results, status) => {
+          if (status === "OK") {
+            // console.log(results)
+            document.getElementById("EndAddress").value = results[0].formatted_address
+          } else {
+            console.log("Geocode Unsuccessful")
+          }
+        });
+    }
+
     render(){
         //leaving this as an example of how to decode an encoded polyline from google maps api
         var renderPolyline = false;
@@ -58,12 +88,12 @@ class Map extends Component {
                     ) : (null)
                 }
                 <Marker 
+                onLoad = { marker => {
+                    this.Arrival_Marker = marker;
+                }}
                     id = 'arrival_pin'
                     draggable = {true}
-                    onDragEnd = {() => {
-                        console.log();
-                        this.props.updateArrival();
-                    }}
+                    onDragEnd = {() => { this.arrivalUpdate() }}
                     title = 'The Ceeps'
                     label = "Arrival"
                     clickable = {true}
@@ -71,9 +101,12 @@ class Map extends Component {
                     position = {{ lat: arrLat, lng: arrLng }}
                 />
                 <Marker 
+                onLoad = { marker => {
+                    this.Departure_Marker = marker;
+                }}
                     id = 'destination_pin'
                     draggable = {true}
-                    onDragEnd = {() => {this.props.updateDeparture(this.position)}}
+                    onDragEnd = {() => { this.departureUpdate() }}
                     title = 'Broughdale'
                     label = "Destination"
                     clickable = {true}

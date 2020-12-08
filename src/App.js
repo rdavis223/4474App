@@ -12,8 +12,6 @@ var defaultVal = {
 }
 // CEEPS
 var arrivalVal = {lat: 43.00738223906186, lng: -81.26169367032458}
-// var arrivalVal = document.getElementById("StartAddress").value;
-// BROUGHDALE
 var destinationVal = {lat: 42.99253105656541, lng: -81.25222223247258};
 const mapWidthFull = {width: "100%"};
 const mapWidthTab = {width: "70vw", float: "right"};
@@ -36,41 +34,7 @@ class App extends Component {
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
-     this.updateArrival = this.updateArrival.bind(this);
-     this.updateDeparture = this.updateDeparture.bind(this);
-
   };
-
-  updateArrival() {
-    const pos = this.state.arrVal.lat;
-    console.log("Updating Position..." + pos);
-    const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({location: pos}, (results, status) => {
-      if (status === "OK") {
-        console.log(results)
-      } else {
-        console.log("Geocode Unsuccessful")
-      }
-    });
-    
-    
-    // var reverseGeocodeRequest = "https://maps.googleapis.com/maps/api/geocode/json?latlng="
-    //   + this.state.arrVal.lat + "," + this.state.arrVal.lng + "&key="
-    // fetch(reverseGeocodeRequest)
-    // .then(response => response.json()).then(data => {
-    //   console.log(data);
-    //   if (document.getElementById("EndAddress") != null) {
-    //     document.getElementById("EndAddress").value = "test1";
-    //   }
-    // })
-  }
-
-  updateDeparture(newPosition) {
-    destinationVal = newPosition;
-    if (document.getElementById("StartAddress") != null) {
-      document.getElementById("StartAddress").value = "test2";
-    }
-  }
 
   displayPolyline(polyline, bounds){
     this.setState({
@@ -78,6 +42,7 @@ class App extends Component {
       mapBounds: bounds
     })
   }
+
   buildRequestUrl(){
     var params = {}
     params['key'] = "xxx";
@@ -159,7 +124,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal} updateArrival = {this.updateArrival} updateDeparture = {this.updateDeparture}/>
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       </div>
