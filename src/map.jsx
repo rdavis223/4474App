@@ -18,6 +18,7 @@ class Map extends Component {
         var renderBusPolyline = false;
         var coordinates = null;
         var buscoor = null;
+        var markers = [];
 
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
@@ -29,6 +30,20 @@ class Map extends Component {
             renderBusPolyline = true;
             buscoor = this.props.busPoly;
         }
+        if (this.props.renderStops)
+        {
+            if (this.props.stopZoom == "Zoom")
+            {
+                var b = new window.google.maps.LatLngBounds();
+                var lat = this.map.center.lat();
+                var lng = this.map.center.lng();
+                b.extend({"lat": lat+0.01, "lng": lng +0.01})
+                b.extend({"lat": lat-0.01, "lng": lng -0.01})
+                this.map.fitBounds(b);
+            }
+            markers = this.props.sData;
+        }
+
         return (
             <div className="map">
                 <div className="google-map" style = { this.props.mapWidth }>
@@ -38,7 +53,7 @@ class Map extends Component {
                     }}
                     mapContainerStyle = {{
                         width: this.props.mapWidth.width,
-                        height: '100vh'
+                        height: this.props.mapHeight.height
                         }}
                     center={this.props.location}
                     zoom={this.props.zoomLevel}>
@@ -51,6 +66,9 @@ class Map extends Component {
                     renderBusPolyline ? (
                         <Polyline path={buscoor} style ={{fillColor:this.props.busCol}}/>
                     ) : (null)
+                }
+                {
+                    this.props.renderStops?(markers):(null)           
                 }                     
                 </GoogleMap>
                 </div>
