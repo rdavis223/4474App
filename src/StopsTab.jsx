@@ -44,11 +44,18 @@ class StopsTab extends Component
         }
         return (
             <div id="StopsTabContainer" className={ visability } style = {this.props.menuWidth}>
-            <button onClick= {this.props.closeStops}>Close</button>
-            <p>Stop: {this.props.stopname}</p> 
-            <div id = "Stops">
-                {this.props.stopInfo}
-            </div>
+            
+                <div id="StopCloseButtonContainer">
+                    <button className="StopCloseButton" onClick= {this.props.closeStops}>Close</button>
+                </div>
+                <div id="StopTitleContainer">
+                    {this.props.stopname}
+                </div>
+                <div id="StopContent">
+                    <div id = "Stops">
+                        {this.props.stopInfo}
+                    </div>
+                </div>
         </div> );
     }
 }

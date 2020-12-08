@@ -1,6 +1,6 @@
 #StopsTabContainer {
     width: 100vw;
-    height: 20vh;
+    height: 25vh;
     border-style: solid;
     background-color: white;
     position: fixed;
@@ -40,4 +40,39 @@
   }
   .block {
     display: inline-block;
+  }
+
+  #StopCloseButtonContainer {
+    text-align: left;
+    background-color: #8e44e3;
+    padding-right: 2px;
+    padding-top: 2px;
+  }
+  
+  .StopCloseButton {
+    background: #8e44e3;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border-style: none;
+  }
+  
+  .StopCloseButton:hover {
+    background: white;
+    color: #8e44e3;
+  }
+  
+  #StopTitleContainer {
+    background-color: #8e44e3;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  #StopContent {
+    padding-left: 30px;
+    padding-right: 30px;
   }
