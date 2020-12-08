@@ -5,7 +5,9 @@ import Map from './map.jsx'
 import MenuButton from './MenuButton.jsx'
 import RoutesButton from './RoutesButton.jsx'
 import PlanYourTripTab from './PlanYourTripTab.jsx'
+import Directions from './Directions.jsx'
 import BusRoutesTab from './RoutesTab.jsx'
+import { FusionTablesLayer } from "react-google-maps";
 
 var defaultVal = {
   center: {lat: 42.962896, lng: -81.197274}, 
@@ -31,21 +33,34 @@ class App extends Component {
        mapPolyline: null,
        mapBounds: null,
        busPolyline: null,
-       busColour: '#00ffff'
+       busColour: '#00ffff',
+       directionsVisable: false
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
      this.displayPolyline = this.displayPolyline.bind(this);
      this.displayBusPolyline = this.displayBusPolyline.bind(this);
      this.plotRoute = this.plotRoute.bind(this);
+     this.closeDirectionsPage = this.closeDirectionsPage.bind(this);
     };
 
-  displayPolyline(polyline, bounds){
+  displayPolyline(polyline, bounds, index){
     this.setState({
       mapPolyline: polyline,
-      mapBounds: bounds
+      mapBounds: bounds,
+      directionsVisable: true,
+      planRouteTabVisable: false,
+      directionsIndex: index
     })
   }
+
+  closeDirectionsPage(){
+    this.setState({
+      directionsVisable: false,
+      planRouteTabVisable: true,
+    })
+  }
+
   buildRequestUrl(){
     var params = {}
     params['key'] = "AIzaSyCoheb6kohffzpBDMu5-YJQg5UGSQrBIo0";
@@ -97,7 +112,7 @@ class App extends Component {
   displayBusPolyline(polyline, bColour){
     this.setState({
       busPolyline: polyline,
-      busColour: bColour
+      busColour: bColour,
     })
   }
   plotRoute(){
@@ -163,6 +178,8 @@ class App extends Component {
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
+      { this.state.directionsVisable ?
+      (<Directions menuVisibility = { this.state.directionsVisable } steps = {this.state.route_data[this.state.directionsIndex].legs[0].steps} handlePageClose = {this.closeDirectionsPage}/>) : null }
       </div>
       
       );
