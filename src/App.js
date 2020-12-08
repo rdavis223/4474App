@@ -34,7 +34,8 @@ class App extends Component {
        mapBounds: null,
        busPolyline: null,
        busColour: '#00ffff',
-       directionsVisable: false
+       directionsVisable: false,
+       loading: false
      };
      this.toggleRouteButton = this.toggleRouteButton.bind(this);
      this.toggleBusRoutesButton = this.toggleBusRoutesButton.bind(this);
@@ -63,6 +64,15 @@ class App extends Component {
   }
 
   plotRoute(){
+    if (document.getElementById("StartAddress").value == "" || document.getElementById("EndAddress").value == ""){
+      window.alert("Please Enter Both Origin and Destination to Plan Your Trip!");
+      return
+    }
+
+    this.setState({
+      display_routes: false,
+      loading: true
+    });
     var params = {}
     params['travelMode'] = "TRANSIT"
     params['transitOptions'] = {
@@ -104,10 +114,15 @@ class App extends Component {
       if (status === "OK") {
         this.setState({
               route_data: response.routes,
-              display_routes: true
+              display_routes: true,
+              loading: false
             });
       } else {
-        window.alert("Directions request failed due to " + status);
+        this.setState({
+          route_data: "No Results",
+          display_routes: true,
+          loading: false
+        });
       }
     }
   );
@@ -169,7 +184,7 @@ class App extends Component {
       <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour}/>
       <MenuButton handleClick={this.toggleRouteButton}/>
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline} loading = {this.state.loading}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
       { this.state.directionsVisable ?
       (<Directions menuVisibility = { this.state.directionsVisable } steps = {this.state.route_data[this.state.directionsIndex].legs[0].steps} handlePageClose = {this.closeDirectionsPage}/>) : null }

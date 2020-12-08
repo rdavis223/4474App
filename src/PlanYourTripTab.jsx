@@ -17,7 +17,6 @@ class PlanYourTripTab extends Component {
 
         startBox.value = endValue;
         endBox.value = startValue;
-
     }
     render() {
         this.data = []
@@ -28,6 +27,10 @@ class PlanYourTripTab extends Component {
 
         var items_to_render = []
         var data = this.props.route_data;
+        if (data == "No Results"){
+            items_to_render = data;
+        } else {
+        var items_to_render = []
         if (data !== null){
             for (var route in data){
                 var r = data[route].legs[0];
@@ -76,7 +79,8 @@ class PlanYourTripTab extends Component {
                                 Arriving At: {elem.arrival} <br/>
                             </div>   );
             }
-        }   
+        }
+    }   
 
         var min_date = new Date().toISOString()
         return (
@@ -125,7 +129,13 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 ) : (null) }
-
+                {
+                this.props.loading ? (
+                <div className="innerFormLoader">
+                    <div class="loader"></div> 
+                </div>
+                ) : (null)
+                }
             </div>
         
         
