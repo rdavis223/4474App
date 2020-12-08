@@ -3,11 +3,16 @@ import './StopsButton.css';
 
 class StopsButton extends Component{
     render() {
+        var btn_text = "Show Nearby Stops"
+        if (this.props.toggle) {
+            btn_text = "On"
+        }
+
         return (
             <button id="StopsButton" 
             style = {{width: 160, height: 60}}
             onClick= {this.props.handleClick}>
-                Show Stops</button>
+                { btn_text }</button>
         );
       }
 }
