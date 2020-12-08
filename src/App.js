@@ -41,7 +41,7 @@ class App extends Component {
        mapBounds: null,
        busPolyline: null,
        busColour: '#00ffff',
-       directionsVisable: false
+       directionsVisable: false,
        stopsData:null,
        renderStops:false,
        stopname:"",
