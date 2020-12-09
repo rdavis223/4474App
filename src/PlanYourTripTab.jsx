@@ -17,7 +17,6 @@ class PlanYourTripTab extends Component {
 
         startBox.value = endValue;
         endBox.value = startValue;
-
     }
     render() {
         this.data = []
@@ -28,6 +27,10 @@ class PlanYourTripTab extends Component {
 
         var items_to_render = []
         var data = this.props.route_data;
+        if (data == "No Results"){
+            items_to_render = data;
+        } else {
+        var items_to_render = []
         if (data !== null){
             for (var route in data){
                 var r = data[route].legs[0];
@@ -36,7 +39,7 @@ class PlanYourTripTab extends Component {
                 for (var step in r.steps){
                     var d = r.steps[step];
                     if (d.travel_mode == "TRANSIT"){
-                        buses.push(d.transit_details.line.name);
+                        buses.push(d.transit.line.name);
                     } else if (d.travel_mode == "WALKING"){
                         walking_distance += d.distance.value;
                     }
@@ -48,7 +51,7 @@ class PlanYourTripTab extends Component {
                     duration: r.duration,
                     transfers: buses.length - 1,
                     walking : walking_distance,
-                    polyline: data[route].overview_polyline.points,
+                    polyline: data[route].overview_polyline,
                     bounds: data[route].bounds,
                     arrival: r.arrival_time.text,
                     departure: r.departure_time.text
@@ -100,7 +103,8 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>   );
             }
-        }   
+        }
+    }   
 
         var min_date = new Date().toISOString()
         return (
@@ -149,7 +153,13 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 ) : (null) }
-
+                {
+                this.props.loading ? (
+                <div className="innerFormLoader">
+                    <div class="loader"></div> 
+                </div>
+                ) : (null)
+                }
             </div>
         )
     }
