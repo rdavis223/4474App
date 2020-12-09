@@ -40,7 +40,7 @@ class Directions extends Component {
                         {
                             stepData.travel_mode == "TRANSIT" ? (
                                 <div className="innerDirectionsOther"> 
-                                <b>Headsign:</b> {stepData.transit.headsign} <br/> 
+                                <b>Bus Sign:</b> {stepData.transit.headsign} <br/> 
                                 <b>Departing From:</b> Stop: {stepData.transit.departure_stop.name}, Time: {stepData.transit.departure_time.text} <br/>
                                 <b>Arriving At:</b> Stop: { stepData.transit.arrival_stop.name}, Time: { stepData.transit.arrival_time.text} <br/></div>
                             ) : (null)
