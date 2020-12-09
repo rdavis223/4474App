@@ -36,8 +36,8 @@ class Map extends Component {
                 var b = new window.google.maps.LatLngBounds();
                 var lat = this.map.center.lat();
                 var lng = this.map.center.lng();
-                b.extend({"lat": lat+0.01, "lng": lng +0.01})
-                b.extend({"lat": lat-0.01, "lng": lng -0.01})
+                b.extend({"lat": lat+0.003, "lng": lng +0.003})
+                b.extend({"lat": lat-0.003, "lng": lng -0.003})
                 this.map.fitBounds(b);
             }
             markers = this.props.sData;

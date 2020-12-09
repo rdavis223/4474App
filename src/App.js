@@ -267,9 +267,9 @@ class App extends Component {
     return (
       <div>      
       <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } mapHeight={ this.state.mapHeight } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} sData = {this.state.stopsData} renderStops = {this.state.renderStops} stopZoom = {this.state.stopZoom}/>
-      <MenuButton handleClick={this.toggleRouteButton}/>
-      <RoutesButton handleClick={this.toggleBusRoutesButton}/>
-      <StopsButton handleClick={this.stopsVisible}/>
+      <MenuButton toggle={this.state.planRouteTabVisable} handleClick={this.toggleRouteButton}/>
+      <RoutesButton toggle={this.state.busRoutesTabVisable} handleClick={this.toggleBusRoutesButton}/>
+      <StopsButton toggle={this.state.renderStops} handleClick={this.stopsVisible}/>
       <StopsTab proccessStop = {this.proccessStop} stopname = {this.state.stopname} stopInfo = {this.state.stopInfo} menuVisibility = { this.state.stopsTabVisible }  menuWidth = {this.state.mapWidth} handleClick = {this.activateStopsTab} closeStops = {this.closeStopsTab} handleStopsClicked = {this.displayStops}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>

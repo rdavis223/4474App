@@ -5,7 +5,7 @@ class StopsButton extends Component{
     render() {
         var btn_text = "Show Nearby Stops"
         if (this.props.toggle) {
-            btn_text = "On"
+            btn_text = "Hide Nearby Stops"
         }
 
         return (

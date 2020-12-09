@@ -3,9 +3,14 @@ import './RoutesButton.css';
 
 class RoutesButton extends Component{
     render() {
+        var btn_toggle = "show"
+        if (this.props.toggle){
+            btn_toggle = "hide"
+        }
         return (
             <button id="BusRoutesButton" 
             style = {{width: 160, height: 60}}
+            className = {btn_toggle}
             onClick= {this.props.handleClick}>
                 Bus Routes</button>
         );
