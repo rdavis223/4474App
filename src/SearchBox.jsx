@@ -24,8 +24,10 @@ export default class SearchBox extends React.Component {
             console.log(results)
             if (this.props.inputID == "StartAddress" ) {
               window.Start_Marker.setPosition(results[0].geometry.location)
+              window.last_start_loc = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
             } else {
               window.End_Marker.setPosition(results[0].geometry.location)
+              window.last_end_loc = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
             }
           } 
           else {

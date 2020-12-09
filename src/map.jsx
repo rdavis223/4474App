@@ -14,11 +14,14 @@ class Map extends Component {
         this.startAddress = document.getElementById("StartAddress")
         this.endAddress = document.getElementById("EndAddress")
         this.inputFields = document.getElementById("InputFieldsContainer")
+        window.last_start_loc = null;
+        window.last_end_loc = null;
     }
 
     endUpdate() {
         const end_marker_lat = this.End_Marker.getPosition().lat();
         const end_marker_lng = this.End_Marker.getPosition().lng();
+        window.last_end_loc = {lat: end_marker_lat, lng: end_marker_lng};
         const coords = new window.google.maps.LatLng(end_marker_lat, end_marker_lng)
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({location: coords}, (results, status) => {
@@ -33,6 +36,7 @@ class Map extends Component {
     startUpdate() {
         const start_marker_lat = this.Start_Marker.getPosition().lat();
         const start_marker_lng = this.Start_Marker.getPosition().lng();
+        window.last_start_loc = {lat: start_marker_lat, lng: start_marker_lng};
         const coords = new window.google.maps.LatLng(start_marker_lat, start_marker_lng)
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({location: coords}, (results, status) => {
@@ -55,8 +59,17 @@ class Map extends Component {
         // console.log(this.arrMarker);
         var arrLat = this.arrMarker.lat;
         var arrLng = this.arrMarker.lng;
+        if (window.last_end_loc != null){
+            arrLat = window.last_end_loc["lat"];
+            arrLng = window.last_end_loc["lng"];
+        }
         var desLat = this.desMarker.lat;
         var desLng = this.desMarker.lng;
+
+        if (window.last_start_loc != null){
+            desLat = window.last_start_loc["lat"];
+            desLng = window.last_start_loc["lng"];
+        }
         // var destinationAddress = "lat: 42.99253105656541, lng: -81.25222223247258";
         var coordinates = null;
         var buscoor = null;
