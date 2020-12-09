@@ -136,7 +136,8 @@ class App extends Component {
       busPolyline: polyline,
       busColour: bColour,
       busBounds: bounds,
-      lastPressed: 'Full'
+      lastPressed: 'Full',
+      stopZoom:"Marker"
     })
   }
   displayBusHoverPolyline(polyline, bColour){
@@ -247,14 +248,16 @@ class App extends Component {
       this.setState({
       renderStops:false,
       stopsTabVisible:false,
-      stopZoom:"Marker"
+      stopZoom:"Marker",
+      lastPressed: 'Hover'
     })
     }
     else
     {    
       this.setState({
       renderStops:true,
-      stopZoom:"Zoom"
+      stopZoom:"Zoom",
+      lastPressed: 'Hover'
     })
     }
   }
