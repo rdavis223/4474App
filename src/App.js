@@ -7,7 +7,6 @@ import RoutesButton from './RoutesButton.jsx'
 import PlanYourTripTab from './PlanYourTripTab.jsx'
 import Directions from './Directions.jsx'
 import BusRoutesTab from './RoutesTab.jsx'
-import { FusionTablesLayer } from "react-google-maps";
 
 var defaultVal = {
   center: {lat: 42.962896, lng: -81.197274}, 
@@ -99,7 +98,23 @@ class App extends Component {
           break;
         } else {
           var eID = time_options[index].value + "_at_input";
-          var time = new Date(document.getElementById(eID).value)
+          var dateValue = document.getElementById(eID).value
+          if (dateValue == "" || dateValue  == null){
+            window.alert("The date field is blank, please enter a date");
+            this.setState({
+              loading: false
+            });
+            return
+          }
+          var today = new Date();
+          var time = new Date(dateValue)
+          if (time < today){
+            window.alert("The date specfied is in the past, please enter a valid date in the future instead. ")
+            this.setState({
+              loading: false
+            });
+            return
+          }
           if (time_options[index].value == "arriving"){
             params['transitOptions']["arrivalTime"] = time;
           } else if (time_options[index].value == "leaving"){
