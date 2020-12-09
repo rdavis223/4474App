@@ -7,7 +7,6 @@ import { routesDataJson } from './routesData.js';
 var csvValues = []
 var coorPoints = null
 var buttons = []
-var busBounds
 class RoutesTab extends Component 
 {
     constructor(props) {
@@ -15,30 +14,24 @@ class RoutesTab extends Component
         csvValues = this.parseCsv();
         coorPoints = this.getRoutesList();
         buttons = []
-        busBounds = this.getBounds(csvValues,coorPoints)
         for (let i = 0; i < csvValues.length; i++) {
-            buttons.push(<button key = {i}
+            buttons.push(<button key = {i} id="RoutesTabButtons"
                 style = {{width: "100%", height: 40, backgroundColor:('#'+ csvValues[i][1])}}
-                onClick={() => this.props.handleBusRouteClicked(coorPoints[csvValues[i][2]], '#'+ csvValues[i][1], busBounds[csvValues[i][2]])}
-                onMouseOver={() => this.props.handleBusRouteHover(coorPoints[csvValues[i][2]], '#'+ csvValues[i][1])}>
+                onClick={() => this.props.handleBusRouteClicked(coorPoints[csvValues[i][2]], '#'+ csvValues[i][1])}>
                 {csvValues[i][0]}
             </button>)
         }
     }
 
-    getBounds(values,points)
-    {    
-        var totalBounds = {};  
-        for (let i = 0; i < values.length; i++) {          
-            var bounds = new window.google.maps.LatLngBounds();
-            var subset = points[values[i][2]]
-            for (var x=0;x<subset.length;x++)
-            {
-                bounds.extend(subset[x]);
-            }
-            totalBounds[values[i][2]] = bounds;
-        }
-        return totalBounds;
+    makeButton(data)
+    {
+        return (
+            <button
+                style = {{width: 200, height: 40, backgroundColor:('#'+ data[1])}}
+                onClick={this.props.handleBusRouteClicked(coorPoints[data[2]], '#'+ data[1])}>
+                {data[0]}
+            </button>
+        );     
     }
     getRoutesList()
     {

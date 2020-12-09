@@ -2768,7 +2768,7 @@ var routePointsJson = JSON.parse(`[
     {
       "route_id": "02",
       "shape_pt_lat": 42.9928,
-      "shape_pt_lon": -81.15486,
+      "shape_pt_lon": -81.102,
       "shape_pt_sequence": 258
     },
     {
@@ -41840,7 +41840,7 @@ var routePointsJson = JSON.parse(`[
     {
       "route_id": 93,
       "shape_pt_lat": 42.950539,
-      "shape_pt_lon": -81.255165,
+      "shape_pt_lon": -81.227,
       "shape_pt_sequence": 151
     },
     {
