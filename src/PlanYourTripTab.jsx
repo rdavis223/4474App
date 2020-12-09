@@ -165,6 +165,12 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 ) : (null) }
+                {this.props.loading ? (
+                <div className="innerFormLoader">
+                    <div class="loader"></div> 
+                </div>
+                ) : (null)
+                }
 
             </div>
         )

@@ -325,7 +325,7 @@ class App extends Component {
       <RoutesButton toggle={this.state.busRoutesTabVisable} handleClick={this.toggleBusRoutesButton}/>
       <StopsButton toggle={this.state.renderStops} handleClick={this.stopsVisible}/>
       <StopsTab proccessStop = {this.proccessStop} stopname = {this.state.stopname} stopInfo = {this.state.stopInfo} menuVisibility = { this.state.stopsTabVisible }  menuWidth = {this.state.mapWidth} handleClick = {this.activateStopsTab} closeStops = {this.closeStopsTab} handleStopsClicked = {this.displayStops}/>
-      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
+      <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline} loading={this.state.loading}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline} handleBusRouteHover = {this.displayBusHoverPolyline}/>
       { this.state.directionsVisable ?
       (<Directions menuVisibility = { this.state.directionsVisable } steps = {this.state.route_data[this.state.directionsIndex].legs[0].steps} handlePageClose = {this.closeDirectionsPage}/>) : (null) }
