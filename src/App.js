@@ -117,9 +117,9 @@ class App extends Component {
     if (min_walking !== null && min_transfers !==null ){
       if (min_walking.checked){
         this.state.sort_by = "walking";
-        params['transitOptions']['routingPreference'] = 'less_walking';
+        params['transitOptions']['routingPreference'] = 'LESS_WALKING';
       } else if (min_transfers.checked){
-        params['transitOptions']['routingPreference'] = 'fewer_transfers';
+        params['transitOptions']['routingPreference'] = 'FEWER_TRANSFERS';
         this.state.sort_by = "transfers";
       }
     }
