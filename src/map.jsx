@@ -24,7 +24,10 @@ class Map extends Component {
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
             renderPolyline = true;
-            this.map.fitBounds(new window.google.maps.LatLngBounds(this.props.bounds.southwest, this.props.bounds.northeast))
+            if (this.props.mapDrawn == 'Drawn')
+            {
+                this.map.fitBounds(new window.google.maps.LatLngBounds(this.props.bounds.southwest, this.props.bounds.northeast))
+            }
         }
         if (this.props.busPoly)
         {
