@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { LoadScript, GoogleMap, Marker, Polyline, Symbol } from '@react-google-maps/api';
 import decodePolyline from 'decode-google-map-polyline';
 import './map.css';
+import finish_pin from './images/finish_pin.png';
+import start_pin from './images/start_pin.png';
 
 class Map extends Component {
     constructor(props){
@@ -137,9 +139,9 @@ class Map extends Component {
                     this.End_Marker = marker;
                     window.End_Marker = marker;
                 }}
+                    icon = { finish_pin }
                     draggable = {true}
-                    onDragEnd = {() => { this.endUpdate() }}
-                    label = "Destination"               
+                    onDragEnd = {() => { this.endUpdate() }}             
                     clickable = {true}
                     defaultClickable = {true}
                     position = {{ lat: arrLat, lng: arrLng }}
@@ -149,9 +151,9 @@ class Map extends Component {
                     this.Start_Marker = marker;
                     window.Start_Marker = marker;
                 }}
+                    icon = {start_pin}
                     draggable = {true}
                     onDragEnd = {() => { this.startUpdate() }}
-                    label = "Starting"
                     clickable = {true}
                     defaultClickable = {true}
                     position = {{ lat: desLat, lng: desLng }}
