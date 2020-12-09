@@ -352,17 +352,6 @@ var routesDataJson = JSON.parse(`[
       "route_text_color": "000000"
     },
     {
-      "route_id": 92,
-      "agency_id": "LTC -2020 November",
-      "route_short_name": 92,
-      "route_long_name": "Route 92",
-      "route_desc": "",
-      "route_type": 3,
-      "route_url": "",
-      "route_color": "FF8000",
-      "route_text_color": "000000"
-    },
-    {
       "route_id": 93,
       "agency_id": "LTC -2020 November",
       "route_short_name": 93,

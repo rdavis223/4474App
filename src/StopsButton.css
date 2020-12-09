@@ -1,4 +1,4 @@
-#BusRoutesButton {
+#StopsButton {
     position: absolute !important;
     top: 0vw;
     right: 0vw;
@@ -9,19 +9,10 @@
     border-radius: 20px;
     border: 3px solid #8e44e3;
     margin-top: 10px;
-    margin-right: 70px;
+    margin-right: 270px;
 }
 
-#BusRoutesButton:hover {
+#StopsButton:hover {
     background: white;
     color: #8e44e3;
-}
-
-#BusRoutesButton.hide{
-    transform: translate3d(100vw, 0, 0);
-}
-
-#BusRoutesButton.show{
-    transform: translate3d(0vw, 0, 0);
-    overflow: hidden;
 }

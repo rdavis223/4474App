@@ -30,8 +30,68 @@
   #DirectionsContainer h2 a:hover {
     text-decoration: underline;
   }
-  
-  .innerDirections{
-      padding-left: 20px;
+
+  #DirBackButtonContainer {
+    text-align: right;
+    background-color: #8e44e3;
+    padding-right: 2px;
+    padding-top: 2px;
   }
+  
+  .DirBackButton {
+    background: #8e44e3;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border-style: none;
+  }
+  
+  .DirBackButton:hover {
+    background: white;
+    color: #8e44e3;
+  }
+  
+  #DirTitleContainer {
+    background-color: #8e44e3;
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  #DirItemsContainer {
+    margin: 30px 30px;
+    overflow-y: scroll;
+    height: calc(100vh - 160px);
+  }
+
+  #DirectionItems {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #ffdee2;
+    line-height: 120%;
+    border-top: 2px solid #ff425f;
+    border-bottom: 2px solid #ff425f;
+  }
+
+  .innerDirections{
+    padding-left: 20px;
+}
+
+.innerDirectionsOther{
+  padding-left: 20px;
+  padding-top: 15px;
+}
+
+  #DirectionNumber {
+    text-align: center;
+    color: #ff425f;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 78%;
+  }
+
   

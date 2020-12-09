@@ -17,6 +17,7 @@ class PlanYourTripTab extends Component {
 
         startBox.value = endValue;
         endBox.value = startValue;
+
     }
 
     updateStart() {
@@ -43,10 +44,6 @@ class PlanYourTripTab extends Component {
 
         var items_to_render = []
         var data = this.props.route_data;
-        if (data == "No Results"){
-            items_to_render = data;
-        } else {
-        var items_to_render = []
         if (data !== null){
             for (var route in data){
                 var r = data[route].legs[0];
@@ -72,8 +69,7 @@ class PlanYourTripTab extends Component {
                     arrival: r.arrival_time.text,
                     departure: r.departure_time.text
                 }
-
-                this.data.push(element)
+                this.data.push(element);
             }
             if (this.props.sort_by == "walking") {
                 this.data = this.data.sort((a,b) => a.walking - b.walking);
@@ -82,21 +78,45 @@ class PlanYourTripTab extends Component {
             } else {
                 this.data = this.data.sort((a,b) => a.distance.value - b.distance.value);
             }
+
             for (var index in this.data){
                 var elem = this.data[index];
                 items_to_render.push( <div key={index} onClick={ () => this.props.handleRouteClicked(elem.polyline, elem.bounds, index)}> 
-                                ------------<br/>
-                                Buses: {elem.buses.toString()} <br/>
-                                Distance: {elem.distance.text} <br/>
-                                Duration: {elem.duration.text} <br/>
-                                Transfers: {elem.transfers} <br/>
-                                Walking: {elem.walking.toString() + "kms"} <br/>
-                                Depart At: {elem.departure} <br/>
-                                Arriving At: {elem.arrival} <br/>
-                            </div>   );
+                    <div className="RoutesOption">
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <b>Depart At:</b> {elem.departure}
+                            </div>
+                            <div className="rightBox">
+                                <b>Arriving At:</b> {elem.arrival}
+                            </div>
+                        </div>
+                        <hr /> 
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <b>Buses to Take:</b><br />
+                                <b>Distance:</b><br />
+                                <b>Duration:</b><br />
+                            </div>
+                            <div className="rightBox">
+                                {elem.buses.toString()}<br />
+                                {elem.distance.text}<br />
+                                {elem.duration.text}<br />
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="flexContainer">
+                            <div className="leftBox">
+                                <h1><b>Transfers:</b> </h1><h2>{elem.transfers}</h2>
+                            </div>
+                            <div className="rightBox">
+                                <h1><b>Walking:</b> </h1><h2>{elem.walking.toString() + " km"}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>   );
             }
-        }
-    }   
+        }   
 
         var min_date = new Date().toISOString()
         return (
@@ -111,7 +131,7 @@ class PlanYourTripTab extends Component {
                     <div id="SwitchLogoContainer">
                         <div className="SwitchLogo" onClick= {this.switchAddy}></div>
                     </div>
-                    <div id="InputFieldsContainer" >
+                    <div id="InputFieldsContainer" title = "Input an address">
                         <p>Leaving From: </p>
                         <SearchBox inputID="StartAddress"/>
                         <p>Going To: </p>
@@ -119,22 +139,22 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 <div className="innerForm">
-                    <div id="AdditionalOptionsContainer">
-                        <div id="TimeOptionsContainer">
-                            <label><input type="radio" id="time_now" name="time_options" value="now"/>Leaving Now</label><br/>
+                    <div id="AdditionalOptionsContainer" >
+                        <div id="TimeOptionsContainer" title = "Set a date and time">
+                            <label><input type="radio" id="time_now" name="time_options" value="now" defaultChecked/>Leaving Now</label><br/>
                             <label><input type="radio" id="time_leaving" name="time_options" value="leaving"/>
-                            Leaving At:</label>
+                            Leaving At: </label>
                             <input type="datetime-local" id="leaving_at_input"
                             name="meeting-time" 
                             /><br/>
-                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arrving At:</label>
+                            <label><input type="radio" id="time_arriving" name="time_options" value="arriving"/>Arriving At: </label>
                             <input type="datetime-local" id="arriving_at_input"
                             name="meeting-time" />
                             <br/>
                         </div>
                         <AdditionalOptions/>
                         <div id= "FindRoute">
-                            <button onClick={this.props.handlePlot} className="Buttons"> Find Route</button>
+                            <button onClick={this.props.handlePlot} title = "Display the best routes" className="FindRouteButton"> Find Route</button>
                         </div>
                     </div>
                 </div>
@@ -145,16 +165,8 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 ) : (null) }
-                {
-                this.props.loading ? (
-                <div className="innerFormLoader">
-                    <div class="loader"></div> 
-                </div>
-                ) : (null)
-                }
+
             </div>
-        
-        
         )
     }
 }

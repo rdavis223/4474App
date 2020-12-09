@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import './RoutesButton.css';
 
-class MenuButton extends Component{
+class RoutesButton extends Component{
     render() {
+        var btn_toggle = "show"
+        if (this.props.toggle){
+            btn_toggle = "hide"
+        }
         return (
             <button id="BusRoutesButton" 
-            style = {{width: 160, height: 30}}
+            title = "See list of active bus routes"
+            style = {{width: 160, height: 60}}
+            className = {btn_toggle}
             onClick= {this.props.handleClick}>
                 Bus Routes</button>
         );
       }
 }
      
-export default MenuButton;
+export default RoutesButton;
