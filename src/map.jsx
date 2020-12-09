@@ -148,7 +148,7 @@ class Map extends Component {
                     this.props.renderStops?(markers):(null)           
                 }
                 {      
-                this.props.planTripTabOpen ? (  
+                this.props.planTripTabOpen || this.props.directionsPageOpen ? (  
                 <div>      
                 <Marker 
                 onLoad = { marker => {
