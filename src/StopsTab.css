@@ -1,7 +1,6 @@
 #StopsTabContainer {
     width: 100vw;
     height: 25vh !important;
-    border-style: solid;
     background-color: white;
     position: fixed;
     bottom: 0;
