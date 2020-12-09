@@ -3,7 +3,7 @@ import Map from './map.jsx'
 import { stopsJson } from './stops.js';
 import { Marker } from '@react-google-maps/api';
 import './StopsTab.css';
-
+import bus_pin from './images/bus_pin.png';
 var stopValues = {}
 var markers = []
 class StopsTab extends Component 
@@ -16,7 +16,7 @@ class StopsTab extends Component
             var lat = stopValues[keyVal][0]['stop_lat']
             var long = stopValues[keyVal][0]['stop_lon']
             markers.push(
-                <Marker key = {keyVal} position={{'lat':lat,'lng':long}} onClick = {this.props.proccessStop.bind(this,stopValues[keyVal])}/>
+                <Marker key = {keyVal} position={{'lat':lat,'lng':long}} icon = { bus_pin } onClick = {this.props.proccessStop.bind(this,stopValues[keyVal])}/>
                 )
         }
         this.props.handleStopsClicked(markers);
