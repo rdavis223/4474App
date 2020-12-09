@@ -135,7 +135,7 @@
 }
 
 #RoutesBox {
-  height: calc(100vh - 550px);
+  height: calc(100vh - 600px);
   overflow-y: scroll;
   margin-top: 20px;
 }
