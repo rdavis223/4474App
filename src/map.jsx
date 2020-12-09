@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { LoadScript, GoogleMap, Marker, Polyline, Symbol } from '@react-google-maps/api';
 import decodePolyline from 'decode-google-map-polyline';
 import './map.css';
-// import red_pin from './images/red_pin.svg';
 
 class Map extends Component {
     constructor(props){
@@ -64,7 +63,7 @@ class Map extends Component {
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
             renderPolyline = true;
-            this.map.fitBounds(new window.google.maps.LatLngBounds(this.props.bounds.southwest, this.props.bounds.northeast))
+            this.map.fitBounds(this.props.bounds);
         }
         if (this.props.busPoly)
         {
