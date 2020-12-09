@@ -18,6 +18,15 @@ class PlanYourTripTab extends Component {
         startBox.value = endValue;
         endBox.value = startValue;
 
+        var tempStart = {...window.last_start_loc}
+        var tempEnd = {...window.last_end_loc}
+
+        window.Start_Marker.setPosition(new window.google.maps.LatLng(tempEnd["lat"], tempEnd["lng"]));
+        window.last_start_loc = tempEnd;
+
+        window.End_Marker.setPosition(new window.google.maps.LatLng(tempStart["lat"], tempStart["lng"]));
+        window.last_end_loc = tempStart
+
     }
 
     updateStart() {
