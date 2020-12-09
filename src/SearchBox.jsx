@@ -36,5 +36,4 @@ export default class SearchBox extends React.Component {
         });
     }
   }
-ß
 }
