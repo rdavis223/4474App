@@ -95,7 +95,7 @@ class App extends Component {
 
   plotRoute(){
     if (document.getElementById("StartAddress").value == "" || document.getElementById("EndAddress").value == ""){
-      window.alert("Please Enter Both Origin and Destination to Plan Your Trip!");
+      window.alert("The 'Leaving From' and/or 'Going To' fields are empty. Please enter places into these fields, or select by dragging the 'Start' and 'End' pins located on the map.");
       return
     }
 
@@ -131,7 +131,7 @@ class App extends Component {
           var eID = time_options[index].value + "_at_input";
           var dateValue = document.getElementById(eID).value
           if (dateValue == "" || dateValue  == null){
-            window.alert("The date field is blank, please enter a date");
+            window.alert("The 'Leaving At'/'Arriving At' field is blank. Please choose a different time option (such as leaving now), or enter a date into the field");
             this.setState({
               loading: false
             });
@@ -140,7 +140,7 @@ class App extends Component {
           var today = new Date();
           var time = new Date(dateValue)
           if (time < today){
-            window.alert("The date specfied is in the past, please enter a valid date in the future instead. ")
+            window.alert("The date you have entered is in the past! Please enter a future date and time into the 'Leaving At'/'Arriving At' Field")
             this.setState({
               loading: false
             });
