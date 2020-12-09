@@ -144,6 +144,7 @@ class Map extends Component {
                     onDragEnd = {() => { this.endUpdate() }}             
                     clickable = {true}
                     defaultClickable = {true}
+                    title = "Destination Location"
                     position = {{ lat: arrLat, lng: arrLng }}
                 />
                 <Marker 
@@ -156,6 +157,7 @@ class Map extends Component {
                     onDragEnd = {() => { this.startUpdate() }}
                     clickable = {true}
                     defaultClickable = {true}
+                    title = "Starting Location"
                     position = {{ lat: desLat, lng: desLng }}
                 />
                 </GoogleMap>
