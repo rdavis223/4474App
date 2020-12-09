@@ -115,7 +115,7 @@ class PlanYourTripTab extends Component {
                     <div id="SwitchLogoContainer">
                         <div className="SwitchLogo" onClick= {this.switchAddy}></div>
                     </div>
-                    <div id="InputFieldsContainer">
+                    <div id="InputFieldsContainer" title = "Input an address">
                         <p>Leaving From: </p>
                         <SearchBox inputID="StartAddress"/>
                         <p>Going To: </p>
@@ -123,8 +123,8 @@ class PlanYourTripTab extends Component {
                     </div>
                 </div>
                 <div className="innerForm">
-                    <div id="AdditionalOptionsContainer">
-                        <div id="TimeOptionsContainer">
+                    <div id="AdditionalOptionsContainer" >
+                        <div id="TimeOptionsContainer" title = "Set a date and time">
                             <label><input type="radio" id="time_now" name="time_options" value="now"/>Leaving Now</label><br/>
                             <label><input type="radio" id="time_leaving" name="time_options" value="leaving"/>
                             Leaving At: </label>
@@ -138,7 +138,7 @@ class PlanYourTripTab extends Component {
                         </div>
                         <AdditionalOptions/>
                         <div id= "FindRoute">
-                            <button onClick={this.props.handlePlot} className="FindRouteButton"> Find Route</button>
+                            <button onClick={this.props.handlePlot} title = "Display the best routes" className="FindRouteButton"> Find Route</button>
                         </div>
                     </div>
                 </div>

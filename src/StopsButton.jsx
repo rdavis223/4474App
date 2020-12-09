@@ -9,7 +9,8 @@ class StopsButton extends Component{
         }
 
         return (
-            <button id="StopsButton" 
+            <button id="StopsButton"
+            title = "Display all active bus stops on the map" 
             style = {{width: 160, height: 60}}
             onClick= {this.props.handleClick}>
                 { btn_text }</button>

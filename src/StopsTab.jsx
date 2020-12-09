@@ -16,7 +16,7 @@ class StopsTab extends Component
             var lat = stopValues[keyVal][0]['stop_lat']
             var long = stopValues[keyVal][0]['stop_lon']
             markers.push(
-                <Marker key = {keyVal} position={{'lat':lat,'lng':long}} icon = { bus_pin } onClick = {this.props.proccessStop.bind(this,stopValues[keyVal])}/>
+                <Marker key = {keyVal} position={{'lat':lat,'lng':long}} title = "Display all routes that stop at this bus stop" icon = { bus_pin } onClick = {this.props.proccessStop.bind(this,stopValues[keyVal])}/>
                 )
         }
         this.props.handleStopsClicked(markers);

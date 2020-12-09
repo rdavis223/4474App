@@ -21,7 +21,7 @@ class AdditionalOptions extends Component {
     render(){
         return(
             <div>{ !this.state.showAddOptions ? (
-                <button className="OptionsButton" onClick={this.toggleMenu}>Show Additional Options</button>
+                <button className="OptionsButton" title = "Optimize your route in terms of walking or transfers" onClick={this.toggleMenu}>Show Additional Options</button>
             ) : (<button className="OptionsButton" onClick={this.toggleMenu}>Hide Additional Options</button>)}
                 { this.state.showAddOptions ? (
                 <div id="AddOptionsMenu">
