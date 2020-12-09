@@ -134,7 +134,7 @@ class PlanYourTripTab extends Component {
                     <button className="CloseButton" onClick= {this.props.handleClick}>Close</button>
                 </div>
                 <div id="TitleContainer">
-                    Plan Your Trip
+                    Plan A Trip
                 </div>
                 <div className="innerForm">
                     <div id="SwitchLogoContainer">
