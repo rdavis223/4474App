@@ -22,7 +22,7 @@ const mapWidthBusRoutesTab = {width: "86vw", marginRight: "14vw"}
 const mapWidthBothTabs = {width: "56vw", marginLeft: "30vw"}
 
 const mapHeightFull = {height: "100%"}
-const mapHeightStopsTabs = {height: "40vw", marginBottom: "0vw"}
+const mapHeightStopsTabs = {height: "75vh", marginBottom: "0vw"}
 class App extends Component {
   
   constructor(props) {
@@ -147,15 +147,25 @@ class App extends Component {
   }
 
   resizeTabs(){
-    if (this.state.planRouteTabVisable && this.state.busRoutesTabVisable){
-      return mapWidthBothTabs;
-    } else if (this.state.planRouteTabVisable) {
-      return mapWidthPlanRouteTab;
-    } else if (this.state.busRoutesTabVisable){
-      return mapWidthBusRoutesTab;
-    } else {
-      return mapWidthFull;
-    }
+    var currentHeight = 100;
+    var currentWidth = 100;
+    var s = {};
+    if (this.state.planRouteTabVisable){
+      currentWidth = currentWidth - 30;
+      s["marginLeft"] = "30vw";
+    } 
+    if (this.state.stopsTabVisible) {
+      currentHeight = currentHeight - 25
+    } 
+    if (this.state.busRoutesTabVisable){
+      currentWidth = currentWidth - 14;
+      if (!this.state.planRouteTabVisable){
+        s["marginRight"] = "14vw";
+      }
+    } 
+    s["width"] = currentWidth.toString() + "vw";
+    s["height"] = currentHeight.toString() + "vh";
+    return s
   }
 
   toggleRouteButton(){
@@ -190,9 +200,10 @@ class App extends Component {
   activateStopsTab()
   {
     this.state.stopsTabVisible = true;
+    var newMap = this.resizeTabs();
     this.setState(
       {
-        mapHeight: mapHeightStopsTabs,
+        mapHeight: newMap,
         stopZoom:"Marker"
       }  
     );
@@ -201,9 +212,10 @@ class App extends Component {
   closeStopsTab()
   {
     this.state.stopsTabVisible = false;
+    var newMap = this.resizeTabs()
     this.setState(
       {
-        mapHeight: mapHeightFull,
+        mapHeight: newMap,
         stopZoom:"Marker"
       }  
     ); 
@@ -220,7 +232,6 @@ class App extends Component {
     if (this.state.renderStops){
       this.setState({
       renderStops:false,
-      mapHeight:mapHeightFull,
       stopsTabVisible:false,
       stopZoom:"Marker"
     })
@@ -259,7 +270,7 @@ class App extends Component {
       <MenuButton handleClick={this.toggleRouteButton}/>
       <RoutesButton handleClick={this.toggleBusRoutesButton}/>
       <StopsButton handleClick={this.stopsVisible}/>
-      <StopsTab proccessStop = {this.proccessStop} stopname = {this.state.stopname} stopInfo = {this.state.stopInfo} menuVisibility = { this.state.stopsTabVisible } menuWidth = {this.state.mapWidth} handleClick = {this.activateStopsTab} closeStops = {this.closeStopsTab} handleStopsClicked = {this.displayStops}/>
+      <StopsTab proccessStop = {this.proccessStop} stopname = {this.state.stopname} stopInfo = {this.state.stopInfo} menuVisibility = { this.state.stopsTabVisible }  menuWidth = {this.state.mapWidth} handleClick = {this.activateStopsTab} closeStops = {this.closeStopsTab} handleStopsClicked = {this.displayStops}/>
       <PlanYourTripTab menuVisibility= { this.state.planRouteTabVisable } handleClick = {this.toggleRouteButton} handlePlot = {this.plotRoute} displayRoutes = {this.state.display_routes} route_data={this.state.route_data} sort_by = {this.state.sort_by} handleRouteClicked = {this.displayPolyline}/>
       <BusRoutesTab menuVisibility = { this.state.busRoutesTabVisable } handleClick = {this.toggleBusRoutesButton}  handleBusRouteClicked = {this.displayBusPolyline}/>
       { this.state.directionsVisable ?
