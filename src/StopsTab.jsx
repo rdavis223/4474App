@@ -10,6 +10,7 @@ class StopsTab extends Component
 {
     constructor(props) {
         super(props);
+        markers = [];
         stopValues = this.getStopsList();
         for (var keyVal in stopValues) {
             var lat = stopValues[keyVal][0]['stop_lat']

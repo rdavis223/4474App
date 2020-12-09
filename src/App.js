@@ -251,7 +251,7 @@ class App extends Component {
       for (var entry in values)
       {
           var stopName = values[entry]['stop_name'];
-          stopinfo.push(<div key = {values[entry]['route_id']} class={"block"} style = {{width: 200, height: 40, backgroundColor:('#'+ values[entry]['route_color'])}}>
+          stopinfo.push(<div key = {values[entry]['route_id']} className={"block"} style = {{width: 200, height: 40, backgroundColor:('#'+ values[entry]['route_color'])}}>
              {values[entry]['route_id']}
           </div>
           )
