@@ -321,7 +321,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} busHoverPoly = {this.state.busHoverPolyline} busHoverCol={this.state.busHoverColour} buttonType = {this.state.lastPressed} busRouteBounds = {this.state.busBounds} sData = {this.state.stopsData} renderStops = {this.state.renderStops} stopZoom = {this.state.stopZoom} mapDrawn = {this.state.mapDrawn} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal} planTripTabOpen={this.state.planRouteTabVisable} />
+      <Map location={defaultVal.center} zoomLevel={defaultVal.zoom} mapWidth={ this.state.mapWidth } polyline = {this.state.mapPolyline} bounds = {this.state.mapBounds} busPoly = {this.state.busPolyline} busCol = {this.state.busColour} busHoverPoly = {this.state.busHoverPolyline} busHoverCol={this.state.busHoverColour} buttonType = {this.state.lastPressed} busRouteBounds = {this.state.busBounds} sData = {this.state.stopsData} renderStops = {this.state.renderStops} stopZoom = {this.state.stopZoom} mapDrawn = {this.state.mapDrawn} arrMarker = {this.state.arrVal} desMarker = {this.state.desVal} planTripTabOpen={this.state.planRouteTabVisable} directionsPageOpen={this.state.directionsVisable}/>
       <MenuButton toggle={this.state.planRouteTabVisable} handleClick={this.toggleRouteButton}/>
       <RoutesButton toggle={this.state.busRoutesTabVisable} handleClick={this.toggleBusRoutesButton}/>
       <StopsButton toggle={this.state.renderStops} handleClick={this.stopsVisible}/>
