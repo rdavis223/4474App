@@ -9,6 +9,7 @@ class RoutesButton extends Component{
         }
         return (
             <button id="BusRoutesButton" 
+            title = "See list of active bus routes"
             style = {{width: 160, height: 60}}
             className = {btn_toggle}
             onClick= {this.props.handleClick}>

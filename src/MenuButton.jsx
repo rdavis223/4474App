@@ -8,7 +8,7 @@ class MenuButton extends Component{
             btn_toggle = "hide"
         }
         return (
-          <button id="PlanYourTripButton" className={btn_toggle} onClick= {this.props.handleClick}>Plan A Trip</button>
+          <button id="PlanYourTripButton" className={btn_toggle} title = "Find a route to your destination" onClick= {this.props.handleClick}>Plan A Trip</button>
         );
       }
 }
