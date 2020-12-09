@@ -26,7 +26,7 @@ class Map extends Component {
             renderPolyline = true;
             if (this.props.mapDrawn == 'Drawn')
             {
-                this.map.fitBounds(new window.google.maps.LatLngBounds(this.props.bounds.southwest, this.props.bounds.northeast))
+                this.map.fitBounds(this.props.bounds)
             }
         }
         if (this.props.busPoly)

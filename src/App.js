@@ -245,7 +245,7 @@ class App extends Component {
     var newMap = this.resizeTabs();
     this.setState(
       {
-        mapHeight: newMap,
+        mapWidth: newMap,
         stopZoom:"Marker"
       }  
     );
@@ -257,7 +257,7 @@ class App extends Component {
     var newMap = this.resizeTabs()
     this.setState(
       {
-        mapHeight: newMap,
+        mapWidth: newMap,
         stopZoom:"Marker"
       }  
     ); 
