@@ -88,6 +88,7 @@ class App extends Component {
   closeDirectionsPage(){
     this.setState({
       directionsVisable: false,
+      mapPolyline: null,
       planRouteTabVisable: true,
       mapDrawn: 'NotDrawn'
     })
