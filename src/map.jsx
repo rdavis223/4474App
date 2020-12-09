@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { LoadScript, GoogleMap, Marker, Polyline } from '@react-google-maps/api';
 import decodePolyline from 'decode-google-map-polyline';
 import './map.css';
-import { fitBounds } from "google-map-react";
 
 class Map extends Component {
     constructor(props){
