@@ -21,9 +21,9 @@ class Directions extends Component {
             var innerItems = [];
             for (var innerStep in stepData.steps){
                 var innerStepData = stepData.steps[innerStep];
-                if ("instructions" in innerStepData){
-                    innerItems.push(<div key = { innerStep } className = "innerDirections">
-                                    <p dangerouslySetInnerHTML={ {__html : (parseInt(step) + 1).toString() + "." + (parseInt(innerStep) + 1).toString() + " : "+ innerStepData.instructions }}></p>
+                if ("html_instructions" in innerStepData){
+                    innerItems.push(<div className = "innerDirections">
+                                    <p dangerouslySetInnerHTML={ {__html : (parseInt(step) + 1).toString() + "." + (parseInt(innerStep) + 1).toString() + ": "+ innerStepData.html_instructions }}></p>
                                 </div>)
                 }
             }
