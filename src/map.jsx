@@ -146,7 +146,10 @@ class Map extends Component {
                 }
                 {
                     this.props.renderStops?(markers):(null)           
-                }                     
+                }
+                {      
+                this.props.planTripTabOpen ? (  
+                <div>      
                 <Marker 
                 onLoad = { marker => {
                     this.End_Marker = marker;
@@ -172,7 +175,8 @@ class Map extends Component {
                     defaultClickable = {true}
                     title = "Starting Location"
                     position = {{ lat: desLat, lng: desLng }}
-                />
+                /> </div>
+                ) : (null)}
                 </GoogleMap>
                 </div>
             </div>
