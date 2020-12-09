@@ -64,6 +64,7 @@ class Map extends Component {
                     onLoad={map => { 
                         this.map = map;
                     }}
+                    options={{fullscreenControl: false}}
                     mapContainerStyle = {{
                         width: this.props.mapWidth.width,
                         height: this.props.mapWidth.height

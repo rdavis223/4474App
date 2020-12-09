@@ -279,6 +279,7 @@ class App extends Component {
       lastPressed: 'Hover',
       mapDrawn: 'NotDrawn'
     })
+    this.closeStopsTab()
     }
     else
     {    
