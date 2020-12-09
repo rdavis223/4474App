@@ -125,7 +125,7 @@ class PlanYourTripTab extends Component {
                 <div className="innerForm">
                     <div id="AdditionalOptionsContainer" >
                         <div id="TimeOptionsContainer" title = "Set a date and time">
-                            <label><input type="radio" id="time_now" name="time_options" value="now"/>Leaving Now</label><br/>
+                            <label><input type="radio" id="time_now" name="time_options" value="now" defaultChecked/>Leaving Now</label><br/>
                             <label><input type="radio" id="time_leaving" name="time_options" value="leaving"/>
                             Leaving At: </label>
                             <input type="datetime-local" id="leaving_at_input"
