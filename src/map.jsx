@@ -14,10 +14,12 @@ class Map extends Component {
         // var coordinates = (decodePolyline(polyline));
         // console.log(coordinates)
         var renderPolyline = false;
-        var renderBusPolyline = false;
+        var renderBusFullPolyline = false;
+        var renderBusHoverPolyline = false;
         var coordinates = null;
         var buscoor = null;
         var markers = [];
+        var busHoverCoor = null
 
         if (this.props.polyline != null){
             coordinates = (decodePolyline(this.props.polyline));
@@ -26,8 +28,17 @@ class Map extends Component {
         }
         if (this.props.busPoly)
         {
-            renderBusPolyline = true;
+            renderBusFullPolyline = true;
             buscoor = this.props.busPoly;
+            if (this.props.buttonType == 'Full')
+            {
+                this.map.fitBounds(this.props.busRouteBounds);
+            }
+        }
+        if (this.props.busHoverPoly)
+        {
+            renderBusHoverPolyline = true;
+            busHoverCoor = this.props.busHoverPoly;
         }
         if (this.props.renderStops)
         {
@@ -52,7 +63,7 @@ class Map extends Component {
                     }}
                     mapContainerStyle = {{
                         width: this.props.mapWidth.width,
-                        height: this.props.mapHeight.height
+                        height: this.props.mapWidth.height
                         }}
                     center={this.props.location}
                     zoom={this.props.zoomLevel}>
@@ -62,8 +73,13 @@ class Map extends Component {
                     ) : (null)
                 } 
                 {
-                    renderBusPolyline ? (
-                        <Polyline path={buscoor} style ={{fillColor:this.props.busCol}}/>
+                    renderBusFullPolyline ? (
+                        <Polyline path={buscoor} options={{ strokeColor:this.props.busCol}}/>
+                    ) : (null)
+                }
+                {
+                    renderBusHoverPolyline ? (
+                        <Polyline path={busHoverCoor} options={{ strokeWeight: 1.5, strokeOpacity: 0.8, strokeColor:this.props.busHoverCol}}/>
                     ) : (null)
                 }
                 {
