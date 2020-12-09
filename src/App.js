@@ -212,7 +212,9 @@ class App extends Component {
   toggleRouteButton(){
     var newMapWidth = "";
     this.state.planRouteTabVisable = !this.state.planRouteTabVisable;
-
+    if (!this.state.planRouteTabVisable){
+      this.state.mapPolyline = null;
+    }
     newMapWidth = this.resizeTabs();
     this.setState(
       {
