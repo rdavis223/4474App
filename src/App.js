@@ -157,7 +157,6 @@ class App extends Component {
     }
     var dir = new window.google.maps.DirectionsService()
     dir.route(params, (response, status) => {
-      console.log(response);
       if (status === "OK") {
         this.setState({
               route_data: response.routes,
@@ -227,7 +226,6 @@ class App extends Component {
         mapWidth: newMapWidth
       }  
     );
-    console.log(this.state.planRouteTabVisable);
   }
 
   toggleBusRoutesButton(){
@@ -244,7 +242,6 @@ class App extends Component {
       }
       
     );
-    console.log(this.state.busRoutesTabVisable);
   }
 
   activateStopsTab()

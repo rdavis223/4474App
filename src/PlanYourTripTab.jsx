@@ -30,7 +30,6 @@ class PlanYourTripTab extends Component {
     }
 
     updateStart() {
-        console.log("Running")
         if (document.getElementById("StartAddress") != null) {
             const address = document.getElementById("StartAddress").value;
             const geocoder = new window.google.maps.Geocoder();
