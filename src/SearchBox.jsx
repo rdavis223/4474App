@@ -15,13 +15,11 @@ export default class SearchBox extends React.Component {
     this.searchBox = new google.maps.places.SearchBox(input);
   }
   updateStart() {
-    console.log(this)
     if (document.getElementById(this.props.inputID) != null) {
         const address = document.getElementById(this.props.inputID).value;
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({address: address}, (results, status) => {
           if (status === "OK") {
-            console.log(results)
             if (this.props.inputID == "StartAddress" ) {
               window.Start_Marker.setPosition(results[0].geometry.location)
               window.last_start_loc = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
