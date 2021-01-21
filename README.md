@@ -1,5 +1,6 @@
 # 4474App
 London Transit App Redesign for 4474 Human Computer Interaction Project
+
 By Ryan Davis, Connor Cozens, Maya Murad, Christan Whetham, and Mauli Bhatt. 
 
 To run the web application:
